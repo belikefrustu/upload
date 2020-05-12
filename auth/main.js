@@ -59,10 +59,7 @@ function updateSigninStatus(isSignedIn) {
     content.style.display = 'block';
     videoContainer.style.display = 'block';
     getChannel(defaultChannel);
-    if(isSignedIn.access_token) {
-      var uploadVideo = new UploadVideo();
-      uploadVideo.ready(result.access_token);
-    }
+   
   } else {
     authorizeButton.style.display = 'block';
     signoutButton.style.display = 'none';
