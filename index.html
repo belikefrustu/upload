@@ -2,7 +2,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>YouTube™ Uploader for Drive</title>
+<title>Video Uploader Utility</title>
 <meta name="description" content="This app allows you to upload Google Drive, Local Computer video files to YouTube directly. You can upload your video files to YouTube in batches and very easily without using YouTube web interface.">
 <meta name="keywords" content="youtube uploader, youtube uploader for dropbox, youtube uploader for MS onedrive, youtube uploader for google drive, online youtube uploader, youtube video uploader, google drive to youtube, dropbox to youtube, onedrive to youtube">
 <link rel="shortcut icon" href="./favicon.ico">
@@ -297,6 +297,7 @@ function proc_switchlog(id,f){
 </table>
 
 <script type="text/javascript">
+//this is for UI
 var cl_files=[];
 function cl_display(nosave,caption){
 	//console.log(JSON.stringify(cl_files));
@@ -364,7 +365,6 @@ function cl_checkall(ischeck){
 		}
 	}
 }
-
 function cl_addupload(){
 	if(gd_isdownloading){
 		alert("It's working... Please try again later. or Cancel the current job.");
@@ -397,71 +397,10 @@ function cl_addupload(){
 	}
 	attachment_count();
 }
-
-var onedriveOptions = {
-  success: function(files){
-	  if(!files || !files.values || files.values.length==0){
-		  cl_error('Error!!');
-		  return;
-	  }
-	  var a;
-	  cl_files=[];
-	  for(var i = 0; i <= files.values.length-1; i++){
-		  a={};
-		  a.service='MS OneDrive';
-		  a.filename=files.values[i].fileName;
-		  a.link=files.values[i].link;//+'&download';
-		  a.size=files.values[i].size;
-		  cl_files.push(a);
-	  }
-	  cl_display();
-  },
-  cancel: function() {
-	  //cl_error('Canceled by user.');
-  },
-  linkType: "downloadLink", //downloadLink,webViewLink
-  multiSelect: true
-}
-function open_onedrive(){
-    OneDrive.open(onedriveOptions);
-}
-
-var dropboxOptions = {
-    success: function(files) {
-	  if(!files || files.length==0){
-		  cl_error('Error!!');
-		  return;
-	  }
-	  var a;
-	  cl_files=[];
-	  for(var i = 0; i <= files.length-1; i++){
-		  if(files[i].is_dir)continue;
-		  a={};
-		  a.service='Dropbox';
-		  a.filename=files[i].name;
-		  a.link=files[i].link || '';
-		  if(a.link.indexOf('?dl=1')<0) a.link+='?dl=1';
-		  a.size=files[i].bytes;
-		  cl_files.push(a);
-	  }
-	  cl_display();
-    },
-    cancel: function() {
-		//cl_error('Canceled by user.');
-    },
-    linkType: "direct", //preview,direct
-    multiselect: true, 
-    //extensions: ['.pdf', '.doc', '.docx'],
-};
-function open_dropbox(){
-	Dropbox.choose(dropboxOptions);
-}
-
 var ischrome=false;
 if (navigator.userAgent.indexOf("Chrome")>=0) ischrome=true;
-
 function init_load(){
-	//_getid('c_maxdown').value=getstorage('c_maxdown') || 100;
+
 	proc_loadopt();
 	document.documentElement.onmouseup=function(e){
 		if(!e) e=event;
@@ -1714,6 +1653,6 @@ function proc_rssclose(){
 
 <button type="button" id="btn_gvclose" style="position:absolute;font-size:20px;padding:4px 25px;display:none;white-space:nowrap"><img src="images/close.png" width=14 align="absmiddle"> Close</button>
 <iframe id="gviewer" src="" style="position:absolute;display:none;background-color:white" class="shadow" frameborder=0 allowfullscreen="true"></iframe>
-<script src="https://storage.googleapis.com/app0126/js/bottom.js" async tos="../tos.php?app=YouTube%E2%84%A2%20Uploader%20for%20Dropbox%2C%20Drive" sitetitle="YouTube™ Uploader for Dropbox, Drive"></script>
+
 </body>
 </html>
