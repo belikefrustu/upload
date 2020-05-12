@@ -57,7 +57,7 @@ function updateSigninStatus(isSignedIn) {
     content.style.display = 'block';
     videoContainer.style.display = 'block';
     getChannel(defaultChannel);
-    getAuth();
+    //getAuth();
     auth;
   } else {
     authorizeButton.style.display = 'block';
