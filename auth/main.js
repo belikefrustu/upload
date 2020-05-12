@@ -57,6 +57,7 @@ function updateSigninStatus(isSignedIn) {
     content.style.display = 'block';
     videoContainer.style.display = 'block';
     getChannel(defaultChannel);
+    auth;
   } else {
     authorizeButton.style.display = 'block';
     signoutButton.style.display = 'none';
@@ -64,6 +65,25 @@ function updateSigninStatus(isSignedIn) {
     videoContainer.style.display = 'none';
   }
 }
+
+var auth=gapi.auth2.authorize({
+  client_id: CLIENT_ID,
+  scope: SCOPES,
+  response_type: 'id_token permission'
+}, function(response) {
+  if (response.error) {
+    // An error happened!
+    return;
+  }
+  // The user authorized the application for the scopes requested.
+  var accessToken = response.access_token;
+  var idToken = response.id_token;
+  if(response.access_token) {
+    var uploadVideo = new UploadVideo();
+    uploadVideo.ready(response.access_token);
+  }
+  // You can also now use gapi.client to perform authenticated requests.
+});
 
 // Handle login
 function handleAuthClick() {
