@@ -1,0 +1,1936 @@
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>YouTube™ Uploader for Dropbox, Drive</title>
+<meta name="description" content="This app allows you to upload Dropbox, MS OneDrive, Google Drive, Local Computer video files to YouTube directly. You can upload your video files to YouTube in batches and very easily without using YouTube web interface.">
+<meta name="keywords" content="youtube uploader, youtube uploader for dropbox, youtube uploader for MS onedrive, youtube uploader for google drive, online youtube uploader, youtube video uploader, google drive to youtube, dropbox to youtube, onedrive to youtube">
+
+<meta property="og:title" content="YouTube™ Uploader for Dropbox, Drive"> 
+<meta property="og:description" content="This app allows you to upload Dropbox, MS OneDrive, Google Drive, Local Computer video files to YouTube directly. You can upload your video files to YouTube in batches and very easily without using YouTube web interface.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="//imclient.herokuapp.com/youtubeupload/">
+<meta property="og:image" content="//imclient.herokuapp.com/youtubeupload/img/logo128.png">
+
+<link rel="shortcut icon" href="./favicon.ico">
+
+<style>
+body,table,td,span,select,input,textarea{
+	font-size:14px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+button{
+	font-size:14px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
+body{background:#e3e3e3;}
+
+A:link    {color:#0860A8;text-decoration:none;}
+A:visited {color:#0860A8;text-decoration:none;}
+A:active  {color:#0860A8;text-decoration:underline;}
+A:hover  {color:#0860A8;text-decoration:underline;}
+.divopt{
+	-webkit-box-shadow: 0 0 10px #999;
+	-moz-box-shadow: 0 0 10px #999;
+	box-shadow: 0 0 10px #999;
+}
+.menulink{font-size:15px;}
+.input{width:630px;}
+.small{font-size:13px;}
+.header1{color:green}
+</style>
+
+<script src="https://apis.google.com/_/scs/apps-static/_/js/k=oz.gapi.en.utl9jrRztb8.O/m=picker/exm=client/rt=j/sv=1/d=1/ed=1/am=wQE/rs=AGLTcCOUgIiKp6EMsn7UOgLQFm23i5pjzQ/cb=gapi.loaded_1" async=""></script><script src="https://apis.google.com/_/scs/apps-static/_/js/k=oz.gapi.en.utl9jrRztb8.O/m=client/rt=j/sv=1/d=1/ed=1/am=wQE/rs=AGLTcCOUgIiKp6EMsn7UOgLQFm23i5pjzQ/cb=gapi.loaded_0" async=""></script><script src="https://www.googletagservices.com/activeview/js/current/osd.js?cb=%2Fr20100101"></script><script src="https://partner.googleadservices.com/gampad/cookie.js?domain=imclient.herokuapp.com&amp;callback=_gfp_s_&amp;client=ca-pub-1113541014872557"></script><script src="https://pagead2.googlesyndication.com/pagead/js/r20200609/r20190131/show_ads_impl_fy2019.js" id="google_shimpl"></script>
+
+<script src="https://imclient.herokuapp.com/youtubeupload/js/common.js" type="text/javascript"></script>
+
+
+<script>
+var gadb=false;
+function init(){
+	window.onunload=function(){
+		proc_saveopt();
+	}	
+	var sw=_getid('attachment').offsetWidth;
+	for(var i = 1; i <= 7; i++){
+		var a=_getid("log"+i);
+		if(a){
+			if(ischrome) a.setAttribute("readonly", "true");
+			a.setAttribute("spellcheck", "false");
+			a.setAttribute("wrap", "off");
+			a.style.width=sw+'px';
+		}
+	}
+}
+</script>
+<style type="text/css">  @-webkit-keyframes rotate {
+    from  { -webkit-transform: rotate(0deg); }
+    to   { -webkit-transform: rotate(360deg); }
+  }
+
+  @keyframes rotate {
+    from  { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+  }
+
+    .dropbox-dropin-btn, .dropbox-dropin-btn:link, .dropbox-dropin-btn:hover {
+      display: inline-block;
+      height: 14px;
+      font-family: "Lucida Grande", "Segoe UI", "Tahoma", "Helvetica Neue", "Helvetica", sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      color: #636363;
+      text-decoration: none;
+      padding: 1px 7px 5px 3px;
+      border: 1px solid #ebebeb;
+      border-radius: 2px;
+      border-bottom-color: #d4d4d4;
+        background: #fcfcfc;
+  background: -moz-linear-gradient(top, #fcfcfc 0%, #f5f5f5 100%);
+  background: -webkit-linear-gradient(top, #fcfcfc 0%, #f5f5f5 100%);
+  background: linear-gradient(to bottom, #fcfcfc 0%, #f5f5f5 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fcfcfc', endColorstr='#f5f5f5',GradientType=0);  
+    }
+
+    .dropbox-dropin-default:hover, .dropbox-dropin-error:hover {
+      border-color: #dedede;
+      border-bottom-color: #cacaca;
+        background: #fdfdfd;
+  background: -moz-linear-gradient(top, #fdfdfd 0%, #f5f5f5 100%);
+  background: -webkit-linear-gradient(top, #fdfdfd 0%, #f5f5f5 100%);
+  background: linear-gradient(to bottom, #fdfdfd 0%, #f5f5f5 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fdfdfd', endColorstr='#f5f5f5',GradientType=0);  
+    }
+
+    .dropbox-dropin-default:active, .dropbox-dropin-error:active {
+      border-color: #d1d1d1;
+      box-shadow: inset 0 1px 1px rgba(0,0,0,0.1);
+    }
+
+    .dropbox-dropin-btn .dropin-btn-status {
+      display: inline-block;
+      width: 15px;
+      height: 14px;
+      vertical-align: bottom;
+      margin: 0 5px 0 2px;
+      background: transparent url('https://www.dropbox.com/static/images/widgets/dbx-saver-status.png') no-repeat;
+      position: relative;
+      top: 2px;
+    }
+
+    .dropbox-dropin-default .dropin-btn-status {
+      background-position: 0px 0px;
+    }
+
+    .dropbox-dropin-progress .dropin-btn-status {
+      width: 18px;
+      margin: 0 4px 0 0;
+      background: url('https://www.dropbox.com/static/images/widgets/dbx-progress.png') no-repeat center center;
+        -webkit-animation-name: rotate;
+        -webkit-animation-duration: 1.7s;
+        -webkit-animation-iteration-count: infinite;
+        -webkit-animation-timing-function: linear;
+      animation-name: rotate;
+      animation-duration: 1.7s;
+      animation-iteration-count: infinite;
+      animation-timing-function: linear;
+    }
+
+    .dropbox-dropin-success .dropin-btn-status {
+      background-position: -15px 0px;
+    }
+
+    .dropbox-dropin-disabled {
+      background: #e0e0e0;
+      border: 1px #dadada solid;
+      border-bottom: 1px solid #ccc;
+      box-shadow: none;
+    }
+
+    .dropbox-dropin-disabled .dropin-btn-status {
+      background-position: -30px 0px;
+    }
+
+    .dropbox-dropin-error .dropin-btn-status {
+      background-position: -45px 0px;
+    }
+
+  @media only screen and (-webkit-min-device-pixel-ratio: 1.4) {
+      .dropbox-dropin-btn .dropin-btn-status {
+        background-image: url('https://www.dropbox.com/static/images/widgets/dbx-saver-status-2x.png');
+        background-size: 60px 14px;
+          -webkit-background-size: 60px 14px;
+      }
+
+      .dropbox-dropin-progress .dropin-btn-status {
+        background: url('https://www.dropbox.com/static/images/widgets/dbx-progress-2x.png') no-repeat center center;
+        background-size: 20px 20px;
+          -webkit-background-size: 20px 20px;
+      }
+  }
+
+    .dropbox-saver:hover, .dropbox-chooser:hover {
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .dropbox-chooser, .dropbox-dropin-btn {
+      line-height: 11px !important;
+      text-decoration: none !important;
+      box-sizing: content-box !important;
+        -webkit-box-sizing: content-box !important;
+        -moz-box-sizing: content-box !important;
+    }
+    </style><link rel="preload" href="https://adservice.google.co.in/adsid/integrator.js?domain=imclient.herokuapp.com" as="script"><script type="text/javascript" src="https://adservice.google.co.in/adsid/integrator.js?domain=imclient.herokuapp.com"></script><link rel="preload" href="https://adservice.google.com/adsid/integrator.js?domain=imclient.herokuapp.com" as="script"><script type="text/javascript" src="https://adservice.google.com/adsid/integrator.js?domain=imclient.herokuapp.com"></script><style> .picker-dialog-frame{width:100%;height:100%;border:0;overflow:hidden}.picker-dialog-bg{position:absolute;top:0;left:0;background-color:#fff;z-index:1000}.picker-dialog{position:absolute;top:0;left:0;background-color:#fff;border:1px solid #acacac;width:auto;padding:0;z-index:1001;overflow:auto;-moz-box-shadow:rgba(0,0,0,.2) 0 4px 16px;-webkit-box-shadow:rgba(0,0,0,.2) 0 4px 16px;box-shadow:rgba(0,0,0,.2) 0 4px 16px}.picker-dialog-content{font-size:0;padding:0}.picker-dialog-title,.picker-dialog-buttons{display:none}</style><script src="chrome-extension://mooikfkahbdckldjjndioackbalphokd/assets/prompt.js"></script></head>
+<body onload="init()" cz-shortcut-listen="true">
+
+<script type="text/javascript" src="https://js.live.net/v5.0/OneDrive.js" id="onedrive-js" client-id="00000000401EFA3D"></script>
+<script type="text/javascript" src="https://www.dropbox.com/static/api/2/dropins.js" id="dropboxjs" data-app-key="kr19li1hb5w4btr"></script>
+
+<table align="center">
+<tbody><tr><td height="10">
+</td></tr></tbody></table>
+
+<table id="maintable" width="810" border="0" align="center" class="divopt" style="background-color: white; padding: 6px; border: 0px solid rgb(46, 121, 219); height: auto !important;">
+<tbody><tr><td>
+<center>
+<script async="" src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" onerror="gadb=true;"></script>
+<ins class="adsbygoogle" style="display: block; height: 90px;" data-ad-client="ca-pub-1113541014872557" data-ad-slot="3844114700" data-ad-format="link" data-adsbygoogle-status="done"><ins id="aswift_0_expand" style="display:inline-table;border:none;height:90px;margin:0;padding:0;position:relative;visibility:visible;width:792px;background-color:transparent;"><ins id="aswift_0_anchor" style="display:block;border:none;height:90px;margin:0;padding:0;position:relative;visibility:visible;width:792px;background-color:transparent;"><iframe id="aswift_0" name="aswift_0" style="left:0;position:absolute;top:0;border:0;width:792px;height:90px;" sandbox="allow-forms allow-pointer-lock allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation" width="792" height="90" frameborder="0" src="https://googleads.g.doubleclick.net/pagead/ads?client=ca-pub-1113541014872557&amp;output=html&amp;h=90&amp;slotname=3844114700&amp;adk=3332585784&amp;adf=3333712924&amp;w=792&amp;fwrn=4&amp;lmt=1592221598&amp;rafmt=10&amp;psa=1&amp;guci=2.2.0.0.2.2.0.0&amp;format=792x90_0ads_al&amp;url=https%3A%2F%2Fimclient.herokuapp.com%2Fyoutubeupload%2F&amp;flash=0&amp;fwr=0&amp;wgl=1&amp;dt=1592221598253&amp;bpp=20&amp;bdt=72&amp;idt=63&amp;shv=r20200609&amp;cbv=r20190131&amp;ptt=9&amp;saldr=aa&amp;abxe=1&amp;correlator=6843753131997&amp;frm=20&amp;pv=2&amp;ga_vid=689443181.1592221598&amp;ga_sid=1592221598&amp;ga_hid=1717191619&amp;ga_fc=0&amp;iag=0&amp;icsg=47626&amp;dssz=13&amp;mdo=0&amp;mso=0&amp;u_tz=330&amp;u_his=2&amp;u_java=0&amp;u_h=1080&amp;u_w=1920&amp;u_ah=1040&amp;u_aw=1920&amp;u_cd=24&amp;u_nplug=3&amp;u_nmime=4&amp;adx=564&amp;ady=33&amp;biw=1920&amp;bih=888&amp;scr_x=0&amp;scr_y=0&amp;oid=3&amp;pvsid=3018939568237463&amp;pem=196&amp;rx=0&amp;eae=0&amp;fc=640&amp;brdim=-1917%2C-357%2C-1917%2C-357%2C1920%2C-360%2C1914%2C1034%2C1920%2C888&amp;vis=1&amp;rsz=d%7C%7CEe%7C&amp;abl=CS&amp;pfx=0&amp;fu=8336&amp;bc=31&amp;ifi=1&amp;uci=a!1&amp;fsb=1&amp;xpc=rUj3JKqxo5&amp;p=https%3A//imclient.herokuapp.com&amp;dtd=90" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" data-google-container-id="a!1" data-google-query-id="CMLqxY_gg-oCFQiTSwUdGW4KKw" data-load-complete="true"></iframe></ins></ins></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</center>
+
+<table width="100%"><tbody><tr>
+<td><img src="img/logo65.png" width="65">
+</td><td>
+</td><td><a id="toptitle" href="./" title="Go Home" style="color:#1667A0"><span style="font-size:27px;font-family:Verdana, Arial;white-space:nowrap;">YouTube™ Uploader for Dropbox, Drive</span></a>
+<div style="margin-left:2px;margin-bottom:2px">
+This app allows you to upload Dropbox, MS OneDrive, Google Drive, Local Computer video files to YouTube directly.
+You can upload your video files to YouTube in batches and very easily without using YouTube web interface.<br>
+This app only works locally without going through the server.
+Supports Chrome, IE10+, Firefox, Safari..<br>
+Supported video foramts: MOV, MPEG4, MP4, AVI, WMV, MPEGPS, FLV, 3GPP, WebM<br>
+<font class="header1">Note:</font> <a href="#" onclick="proc_show('opt_limit');return false">Size limit per a file</a>
+&nbsp;&nbsp;<a href="https://www.youtube.com/my_videos" target="_blank">My YouTube Video List</a>
+
+<div><table id="opt_limit" style="display:none">
+<tbody><tr><td><font class="header1">Dropbox, OneDrive, Google Drive:</font> 1~Hundreds of MB or GB, but there are file access time restrictions.
+</td></tr><tr><td>
+<font class="header1">Maximum file access time (After select files)</font><br>
+Dropbox: 4 hours, OneDrive: 1 hours, Google Drive: Unlimited on this app
+</td></tr><tr><td><font class="header1">Local Computer:</font> 1~Hundreds of MB or GB, No access time restrictions.
+</td></tr></tbody></table></div>
+
+</div>
+</td></tr></tbody></table>
+
+<center>
+<script type="text/javascript">
+    google_ad_client = "ca-pub-1113541014872557";
+    google_ad_slot = "2367381506";
+    google_ad_width = 728;
+    google_ad_height = 90;
+</script>
+<script type="text/javascript" src="//pagead2.googlesyndication.com/pagead/show_ads.js">
+</script><ins id="aswift_1_expand" style="display:inline-table;border:none;height:90px;margin:0;padding:0;position:relative;visibility:visible;width:728px;background-color:transparent;" data-ad-slot="2367381506"><ins id="aswift_1_anchor" style="display:block;border:none;height:90px;margin:0;padding:0;position:relative;visibility:visible;width:728px;background-color:transparent;"><iframe id="aswift_1" name="aswift_1" style="left:0;position:absolute;top:0;border:0;width:728px;height:90px;" sandbox="allow-forms allow-pointer-lock allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation" width="728" height="90" frameborder="0" src="https://googleads.g.doubleclick.net/pagead/ads?client=ca-pub-1113541014872557&amp;output=html&amp;h=90&amp;slotname=2367381506&amp;adk=3562013754&amp;adf=2543106061&amp;w=728&amp;lmt=1592221598&amp;guci=2.2.0.0.2.2.0.0&amp;url=https%3A%2F%2Fimclient.herokuapp.com%2Fyoutubeupload%2F&amp;flash=0&amp;wgl=1&amp;dt=1592221598277&amp;bpp=11&amp;bdt=96&amp;idt=82&amp;shv=r20200609&amp;cbv=r20190131&amp;ptt=5&amp;saldr=sa&amp;abxe=1&amp;prev_fmts=792x90_0ads_al&amp;correlator=6843753131997&amp;frm=20&amp;pv=1&amp;ga_vid=689443181.1592221598&amp;ga_sid=1592221598&amp;ga_hid=1717191619&amp;ga_fc=0&amp;iag=0&amp;icsg=571914&amp;dssz=14&amp;mdo=0&amp;mso=0&amp;u_tz=330&amp;u_his=2&amp;u_java=0&amp;u_h=1080&amp;u_w=1920&amp;u_ah=1040&amp;u_aw=1920&amp;u_cd=24&amp;u_nplug=3&amp;u_nmime=4&amp;adx=596&amp;ady=283&amp;biw=1920&amp;bih=888&amp;scr_x=0&amp;scr_y=0&amp;oid=3&amp;pvsid=3018939568237463&amp;pem=196&amp;rx=0&amp;eae=0&amp;fc=640&amp;brdim=-1917%2C-357%2C-1917%2C-357%2C1920%2C-360%2C1914%2C1034%2C1920%2C888&amp;vis=1&amp;rsz=d%7C%7Ce%7C&amp;abl=CS&amp;pfx=0&amp;fu=8208&amp;bc=31&amp;ifi=2&amp;uci=a!2&amp;fsb=1&amp;xpc=y78mOlR6h0&amp;p=https%3A//imclient.herokuapp.com&amp;dtd=87" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" data-google-container-id="a!2" data-google-query-id="CJq-x4_gg-oCFcFIKwodus8C8g" data-load-complete="true"></iframe></ins></ins>
+</center>
+
+</td></tr><tr><td>
+<script>
+function proc_saveopt(){
+	var b=[];
+	var c;
+	var obj=_getid("optcontainer");
+	var a=obj.getElementsByTagName('INPUT');
+	for(var i = 0; i < a.length; i++){    
+		if(a[i].type=='checkbox'){
+			c={};
+			c.name=a[i].name;
+			c.type=a[i].type;
+			c.checked=a[i].checked;
+			b.push(c);
+		}else if(a[i].type=='text'){
+			c={};
+			c.name=a[i].name;
+			c.type=a[i].type;
+			c.value=a[i].value || '';
+			b.push(c);
+		}
+	}
+	var a=obj.getElementsByTagName('SELECT');
+	for(var i = 0; i < a.length; i++){    
+		if(a[i].form && a[i].form.name){
+			c={};
+			c.name=a[i].name;
+			c.type='select';
+			c.value=a[i].value || '';
+			b.push(c);
+		}
+	}
+	var a=obj.getElementsByTagName('TEXTAREA');
+	for(var i = 0; i < a.length; i++){    
+		if(a[i].form && a[i].form.name){
+			c={};
+			c.name=a[i].name;
+			c.type='textarea';
+			c.value=a[i].value || '';
+			b.push(c);
+		}
+	}
+	if(window.JSON) setstorage('ytu_c_opt',JSON.stringify(b));
+}
+function proc_loadopt(){
+	var s=getstorage('ytu_c_opt');
+	var b=[];
+	try{
+		b=JSON.parse(s);
+	}catch(err){
+		b=[];
+	}
+	if(!b) b=[];
+
+	var c;
+	for(var i = 0; i < b.length; i++){    
+		if(b[i].type=='checkbox'){
+			c=document.optcontainer[b[i].name];
+			if(c) c.checked=b[i].checked;
+		}else if(b[i].type=='select' || b[i].type=='text' || b[i].type=='textarea'){
+			c=document.optcontainer[b[i].name];
+			if(c) c.value=b[i].value;
+		}
+	}
+	var a=_getid("optcontainer").getElementsByTagName('*');
+	for(var i = 0; i < a.length; i++){    
+		if(a[i].tagName=='SELECT'){
+			a[i].onchange=proc_saveopt;
+		}else if(a[i].type=='checkbox'){
+			if(a[i].name=='o_remove'){
+				a[i].onclick=function(){
+					//document.optcontainer['o_overwrite'].disabled=!this.checked;
+					proc_saveopt();
+				}				
+				//document.optcontainer['o_overwrite'].disabled=!a[i].checked;
+			}else{
+				a[i].onclick=proc_saveopt;
+			}
+		}
+	}
+}
+
+function proc_uncheck(){
+	var a=_getid("optcontainer").getElementsByTagName('*');
+	for(var i = 0; i < a.length; i++){    
+		if(a[i].type=='checkbox') a[i].checked=false;
+	}
+}
+function proc_show(name){
+	var a=_getid(name);
+	if(!a)return;
+	if(a.style.display=='') a.style.display='none';
+	else a.style.display='';
+}
+function getValue(s,s_find,s_end){
+  s_find=s_find.toLowerCase();
+  s_end=s_end.toLowerCase();
+  
+  ss=s.toLowerCase();    
+  p1=ss.indexOf(s_find);
+  if (p1<0) return;
+  s1=s.substr(p1+s_find.length,s.length);
+  
+  ss=s1.toLowerCase();
+  p1=ss.indexOf(s_end);
+  if (p1<0) return;
+  s1=s1.substr(0,p1);
+  return s1;
+}
+function openWindow(url, name, w, h) {
+  var winX = 0;
+  var winY = 0;
+  if (parseInt(navigator.appVersion) >= 4) {
+    winX = (screen.availWidth - w)*.5;
+    winY = (screen.availHeight - h)*.5;
+  }
+  var features = 'width=' + w + ',height=' + h + ',left=' + winX + ',top=' + winY +', resizable=yes, scrollbars=yes';
+  window.open(url, name, features);
+}
+function proc_switchlog(id,f){
+	for(var i = 1; i <= 7; i++){
+		var a=_getid("log"+i);
+		if(a) a.style.display='none';
+	}
+	var a=_getid("log"+id);
+	a.style.display='';
+
+	var a=_getid("logtab").getElementsByTagName('A');
+	for(var i = 0; i < a.length; i++){    
+		a[i].style.fontWeight="normal";
+	}
+	f.style.fontWeight="bold";
+	return false;
+}
+</script>
+
+<style>
+.uploaded{color:green;}
+.error{color:#8A0808;}
+.welcome{color:#45616D;}
+.bold1{color:green;}
+.log{
+	width:100%;height:250px;
+}
+.big1{
+	font-size:19px;
+}
+#logtab a{
+	font-size:14px;
+}
+#gd_progress{width:650px;white-space:nowrap;overflow:hidden;border:0px solid red;}
+#gd_progress2{width:610px;white-space:nowrap;overflow:hidden;border:0px solid red;}
+.filename{width:510px;white-space:nowrap;overflow:hidden;border:0px solid red;}
+</style>
+	<table width="100%">	
+		<tbody><tr><td>
+			<button type="button" onclick="attach_delete()">Remove</button>
+			<button type="button" onclick="attach_clear()">Clear</button>		
+			<button onclick="proc_show('optcontainer')" class="" style="">Video MetaData Options</button>
+			&nbsp;<span id="myemail" style="color:green"></span>
+		</td></tr><tr><td>			
+			<form id="optcontainer" name="optcontainer" style="display:none;border:2px dashed #0860A8;padding:2px" onsubmit="return false">
+				<table>
+				<tbody><tr><td>Privacy Status: <font color="green">Private</font> (You can manually change to the "public" status after uploading)
+				</td></tr><tr><td><label><input type="checkbox" name="o_fileext"> Paste the file extension in the video title</label>				
+				</td></tr><tr><td><!--<label><input type=checkbox name='o_embeddable' checked> Allow embedding</label>&nbsp;&nbsp;//-->
+				License <select name="o_license"><option value="youtube">Standard YouTube License</option><option value="creativeCommon">Creative Commons - Attribution</option></select>
+				</td></tr><tr><td>Default video description<br><textarea name="o_vdesc" style="width:600px;height:80px"></textarea>
+				</td></tr><tr><td>Default video tags (Separate the words with comma)<br><input type="text" name="o_vtags" style="width:600px">
+				</td></tr></tbody></table>
+			</form>
+
+			<div id="downlink" style="margin-bottom:2px">Add files to the list below. Select from Dropbox, OneDrive, Google Drive, Computer.</div>
+			<select id="attachment" style="width:100%;height:190px" multiple="true" onchange="attachment_onchange(this)" onclick="attachment_onchange(this)"></select>
+
+			<div id="desc" style="margin-top:2px;color:green;width:700px;white-space:nowrap;overflow:hidden;border:0px solid red"></div>
+		</td></tr><tr><td>
+			<button onclick="open_dropbox()"><img src="images/service/dropbox.png" align="absmiddle" width="18"> Dropbox</button>
+			<button onclick="open_onedrive()"><img src="images/service/onedrive.png" align="absmiddle" width="18"> OneDrive</button>
+			<button onclick="gd_open_picker()"><img src="images/gdrive/product16.png" align="absmiddle" width="18"> Google Drive</button>
+			<label title="Select a Google account ID to use when signing in." style="white-space:nowrap;"><input type="checkbox" id="gd_seluserid"> Select Login ID</label>
+			&nbsp;&nbsp;<input type="file" id="fileload1" name="files[]" multiple="" style="width:190px" title="Select videos from local computer. Drop files on this page." accept=".MOV,.MPEG4,.MP4,.AVI,.WMV,.MPEGPS,.FLV,.3GPP,.WebM">
+		</td></tr><tr><td>
+			<button type="button" onclick="cl_checkall(true)" title="Check All">Check All</button>			
+			<button type="button" onclick="cl_checkall(false)" title="UnCheck All">UnCheck</button>			
+			<button type="button" onclick="cl_addupload()">Add to Upload List</button> 
+			&nbsp;&nbsp;<button type="button" onclick="cl_upload()" style="color:green">Upload to YouTube</button>
+			<button type="button" onclick="cl_upload(true)" style="">Resume Upload (Error Files)</button>
+		
+		</td></tr><tr><td>
+			<div id="logtab">
+				<a href="#" id="alog6" onclick="return proc_switchlog(6,this)" style="font-weight:bold">Selected Files</a> &nbsp;&nbsp;<a href="#" id="alog4" onclick="return proc_switchlog(4,this)">Download, Upload Log</a> &nbsp;&nbsp;<a href="#" id="alog5" onclick="return proc_switchlog(5,this)">Error Log</a>
+			</div>
+		</td></tr><tr><td>
+			<div id="downlink2" style="margin-bottom:2px"></div>
+			<div id="log4" class="log" style="overflow-y: scroll; display: none; width: 794px;" readonly="true" spellcheck="false" wrap="off"></div>
+			<div id="log5" class="log" style="overflow-y: scroll; display: none; width: 794px;" readonly="true" spellcheck="false" wrap="off"></div>
+			<div id="log6" class="log" style="overflow-y: scroll; width: 794px;" readonly="true" spellcheck="false" wrap="off"></div>
+	</td></tr></tbody></table>
+
+</td></tr><tr><td>
+</td></tr><tr style="height: auto !important;"><td align="center">
+<script async="" src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle" style="display: block; height: 280px;" data-ad-client="ca-pub-1113541014872557" data-ad-slot="2367381506" data-ad-format="auto" data-adsbygoogle-status="done"><ins id="aswift_2_expand" style="display: inline-table; border: none; height: auto !important; margin: 0px; padding: 0px; position: relative; visibility: visible; width: 796px; background-color: transparent;"><ins id="aswift_2_anchor" style="display: block; border: none; height: 280px; margin: 0px; padding: 0px; position: relative; visibility: visible; width: 796px; background-color: transparent; overflow: visible;"><iframe id="aswift_2" name="aswift_2" style="left:0;position:absolute;top:0;border:0;width:796px;height:280px;" sandbox="allow-forms allow-pointer-lock allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation" width="796" height="280" frameborder="0" src="https://googleads.g.doubleclick.net/pagead/ads?client=ca-pub-1113541014872557&amp;output=html&amp;h=280&amp;slotname=2367381506&amp;adk=4161721617&amp;adf=130912522&amp;w=796&amp;fwrn=4&amp;fwrnh=100&amp;lmt=1592221598&amp;rafmt=1&amp;psa=1&amp;guci=2.2.0.0.2.2.0.0&amp;format=796x280&amp;url=https%3A%2F%2Fimclient.herokuapp.com%2Fyoutubeupload%2F&amp;flash=0&amp;fwr=0&amp;rpe=1&amp;resp_fmts=3&amp;wgl=1&amp;adsid=ChAI8Lic9wUQidmZwsqB8Y5mEioA-Kx3iMZ4NeqcF33t_WqV3dHVSWKCkTXdFgwVMOup3bu-cojN3du9qFc&amp;dt=1592221598507&amp;bpp=1&amp;bdt=326&amp;idt=1&amp;shv=r20200609&amp;cbv=r20190131&amp;ptt=9&amp;saldr=aa&amp;abxe=1&amp;prev_fmts=792x90_0ads_al&amp;prev_slotnames=2367381506&amp;correlator=6843753131997&amp;frm=20&amp;pv=1&amp;ga_vid=689443181.1592221598&amp;ga_sid=1592221598&amp;ga_hid=1717191619&amp;ga_fc=0&amp;iag=0&amp;icsg=2287658&amp;dssz=16&amp;mdo=0&amp;mso=0&amp;u_tz=330&amp;u_his=2&amp;u_java=0&amp;u_h=1080&amp;u_w=1920&amp;u_ah=1040&amp;u_aw=1920&amp;u_cd=24&amp;u_nplug=3&amp;u_nmime=4&amp;adx=554&amp;ady=966&amp;biw=1903&amp;bih=888&amp;scr_x=0&amp;scr_y=0&amp;oid=3&amp;pvsid=3018939568237463&amp;pem=196&amp;rx=0&amp;eae=0&amp;fc=640&amp;brdim=-1917%2C-357%2C-1917%2C-357%2C1920%2C-360%2C1914%2C1034%2C1920%2C888&amp;vis=1&amp;rsz=d%7C%7CEebr%7C&amp;abl=CS&amp;pfx=0&amp;fu=8336&amp;bc=31&amp;jar=2020-5-27-8&amp;ifi=3&amp;uci=a!3&amp;btvi=1&amp;fsb=1&amp;xpc=pUVl0y3Zc4&amp;p=https%3A//imclient.herokuapp.com&amp;dtd=5" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" data-google-container-id="a!3" data-google-query-id="CLSK0I_gg-oCFY-ISwUd4rQG8A" data-load-complete="true"></iframe></ins></ins></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+</td></tr></tbody></table><iframe id="google_osd_static_frame_1222336061624" name="google_osd_static_frame" style="display: none; width: 0px; height: 0px;"></iframe>
+
+<script type="text/javascript">
+var cl_files=[];
+function cl_display(nosave,caption){
+	//console.log(JSON.stringify(cl_files));
+	var s='<table>';
+	if(caption) s+='<tr><td><td><td><font style="color:green;">'+caption+'</font><td>';
+	s+='<tr><td><td><td>Filename, Download';
+	if(cl_files.length>0){
+		if(cl_files[0] && cl_files[0].service) s+=' ('+cl_files[0].service+')';
+		//if(cl_files[0].service=='Filepicker') s+=' <button onclick="cl_fp_deleteall()" style="font-size:13px">Delete files from Filepicker Server</button>';	
+	}
+	s+='<td>Size<tr><td colspan=100 style="border-bottom:1px solid black">';
+	var link, access_token;
+	for(var i = 0; i <= cl_files.length-1; i++){
+		gd_files_count++;
+		cl_files[i].idx=gd_files_count;
+		s+='<tr><td><input type=checkbox data="'+i+'" checked>';
+		s+='<td>';
+		link=cl_files[i].link;
+		if(cl_files[i].service=='Google Drive'){
+			if(!access_token) access_token=gapi.auth.getToken().access_token;
+			link+='&access_token='+encodeURIComponent(access_token);
+			cl_files[i].link3=link;			
+			if(cl_files[i].resp && cl_files[i].resp.id){
+				if(cl_files[i].resp.downloadUrl && cl_files[i].resp.webContentLink) cl_files[i].link3=cl_files[i].resp.webContentLink;
+				s+='<a href="#" onclick="proc_gview('+i+',1);return false" target="_blank" title="View this file">View</a>&nbsp;';
+			}
+		}
+		if(!link) s+='<td><div class=filename>'+henc(cl_files[i].filename)+'</div>';
+		else s+='<td><div class=filename><a id="dn_'+i+'" href="'+link+'" target="_blank" title="Download this file">'+henc(cl_files[i].filename)+'</a></div>';
+		s+='<td>'+number_format(cl_files[i].size);
+	}
+	if(cl_files.length==0){
+		s+='<tr><td colspan=100>No files selected';
+	}else{
+		/*if(!nosave && cl_files[0].service=='Filepicker'){
+			var a=cl_fp_load();
+			for(var i = 0; i <= cl_files.length-1; i++){
+				a.push(cl_files[i]);
+			}
+			setstorage('ytu_cl_fp_files',JSON.stringify(a));
+		}*/
+	}
+	s+='</table>';
+	s+='<table style="margin-top:2px"><tr><td><td><font style="color:green;font-size:13px">Maximum file access time (After select files)<br>Dropbox: 4 hours, OneDrive: 1 hours, Google Drive: Unlimited on this app</font></table>';
+
+	_getid('log6').innerHTML='';
+	_log('log6',s,'',true);
+	proc_switchlog(6,_getid('alog6'));
+	var a;
+	for(var i = 0; i <= cl_files.length-1; i++){
+		a=_getid('dn_'+i);
+		if(a) a.download=cl_files[i].filename;
+	}
+}
+function cl_error(s){
+	_log('log6',s,'error');
+	//proc_switchlog(5,_getid('alog5'));
+}
+function cl_checkall(ischeck){
+	var obj=_getid('log6');
+	var a=obj.getElementsByTagName('INPUT');
+	for(var i = 0; i < a.length; i++){    
+		if(a[i].type=='checkbox'){
+			a[i].checked=ischeck;
+		}
+	}
+}
+
+function cl_addupload(){
+	if(gd_isdownloading){
+		alert("It's working... Please try again later. or Cancel the current job.");
+		return;
+	}
+	var obj2=_getid("attachment");
+	var s,d,d2;
+	var obj=_getid('log6');
+	var a=obj.getElementsByTagName('INPUT');
+	for(var i = 0; i < a.length; i++){    
+		if(a[i].type=='checkbox' && a[i].checked){
+			d2=cl_files[a[i].getAttribute("data")];
+			if(d2){
+				d={};
+				d.service=d2.service;
+				d.filename=d2.filename;
+				d.link=d2.link; d.link2=d2.link2; d.link3=d2.link3; d.resp=d2.resp;
+				d.size=d2.size;
+				d.f=d2.f;
+				var c=document.createElement("option");
+				gd_files_count++;
+				d.idx=gd_files_count;
+				s=d.filename+' ('+getsize(d.size)+')'+' - '+d.service;
+				c.value=d.idx;
+				c.appendChild(document.createTextNode(s));		 
+				obj2.appendChild(c);					
+				gd_files.push(d);
+			}
+		}
+	}
+	attachment_count();
+}
+
+var onedriveOptions = {
+  success: function(files){
+	  if(!files || !files.values || files.values.length==0){
+		  cl_error('Error!!');
+		  return;
+	  }
+	  var a;
+	  cl_files=[];
+	  for(var i = 0; i <= files.values.length-1; i++){
+		  a={};
+		  a.service='MS OneDrive';
+		  a.filename=files.values[i].fileName;
+		  a.link=files.values[i].link;//+'&download';
+		  a.size=files.values[i].size;
+		  cl_files.push(a);
+	  }
+	  cl_display();
+  },
+  cancel: function() {
+	  //cl_error('Canceled by user.');
+  },
+  linkType: "downloadLink", //downloadLink,webViewLink
+  multiSelect: true
+}
+function open_onedrive(){
+    OneDrive.open(onedriveOptions);
+}
+
+var dropboxOptions = {
+    success: function(files) {
+	  if(!files || files.length==0){
+		  cl_error('Error!!');
+		  return;
+	  }
+	  var a;
+	  cl_files=[];
+	  for(var i = 0; i <= files.length-1; i++){
+		  if(files[i].is_dir)continue;
+		  a={};
+		  a.service='Dropbox';
+		  a.filename=files[i].name;
+		  a.link=files[i].link || '';
+		  if(a.link.indexOf('?dl=1')<0) a.link+='?dl=1';
+		  a.size=files[i].bytes;
+		  cl_files.push(a);
+	  }
+	  cl_display();
+    },
+    cancel: function() {
+		//cl_error('Canceled by user.');
+    },
+    linkType: "direct", //preview,direct
+    multiselect: true, 
+    //extensions: ['.pdf', '.doc', '.docx'],
+};
+function open_dropbox(){
+	Dropbox.choose(dropboxOptions);
+}
+
+var ischrome=false;
+if (navigator.userAgent.indexOf("Chrome")>=0) ischrome=true;
+
+function init_load(){
+	//_getid('c_maxdown').value=getstorage('c_maxdown') || 100;
+	proc_loadopt();
+	document.documentElement.onmouseup=function(e){
+		if(!e) e=event;
+		if(e.button!=0 && e.button!=1)return;
+		var w=getWindowWidth()-27;
+		var h=getWindowHeight()-27;
+		if(e.clientX>w || e.clientY>h) return;
+    	var b2;
+		if(e.target) b2 = e.target;
+		else if(e.srcElement) b2 = e.srcElement;
+		if(b2.tagName=='A' || b2.tagName=='SPAN')return;
+    	while (b2) {
+			if(b2.id=="rssviewer" || b2.id=="imgrss"){
+				return;
+			}
+    		if (b2==document.body) break;
+			if (b2.parentElement) b2=b2.parentElement;
+			else b2=b2.parentNode;
+    	}
+		proc_rssclose();
+	}
+	
+	var fileload1=_getid('fileload1');
+	fileload1.onchange=function(e){
+		if(!e || !e.target){
+			alert("This browser does not support.");
+			return;
+		}
+		handleFileSelect(e.target.files);
+	}	
+	var arr2=[];
+	var arr="MOV, MPEG4, MP4, AVI, WMV, MPEGPS, FLV, 3GPP, WebM".split(',');
+	for(var i=0; i <= arr.length-1; i++){
+		var s=trim(arr[i]);
+		if(s){
+			arr2.push('.'+s);
+		}
+	}
+	fileload1.setAttribute("accept",arr2.join(','));
+
+	var holder = document;
+	holder.ondragover = function(e){ 
+		try{var ua=navigator.userAgent;
+			if(ua && ua.indexOf("Chrome")>=0){					
+				if(e.originalEvent) e = e.originalEvent;
+				if(e.dataTransfer){
+					var b = e.dataTransfer.effectAllowed;
+					e.dataTransfer.dropEffect = ('move' === b || 'linkMove' === b) ? 'move' : 'copy';
+				}
+			}
+		}catch(err){}
+		return false; 
+	};
+	holder.ondragend = function(){ return false; };
+	holder.ondrop = function (e){
+		e.preventDefault();				
+		handleFileSelect(e.dataTransfer.files);
+		return false;
+	};
+}
+function handleFileSelect(files) {
+	if(!window.FileReader){
+		alert("This browser does not support.");
+		return;
+	}
+	if(!files || files.length==0) return;	
+	var a;
+	cl_files=[];
+	for(var i = 0, f; f = files[i]; i++){
+		a={};
+		a.service='Local File';
+		a.filename=f.name;
+		a.link='';
+		a.size=f.size;
+		a.f=f;
+		cl_files.push(a);
+	}
+	cl_display();
+}
+</script>
+
+<table align="center" style="margin-top:10px"><tbody><tr>
+<td><span id="bottomtitle">ⓒ 2020, YouTube™ Uploader for Dropbox, Drive</span>
+</td><td width="3"></td><td><a href="../tos.php?app=YouTube%E2%84%A2%20Uploader%20for%20Dropbox%2C%20Drive" target="_blank" style="font-size:13px">Privacy Policy</a>
+</td></tr></tbody></table>
+
+<br>
+
+<style>
+.gd_div{background-color:#FFFFE1;position:absolute;overflow:hidden;-webkit-box-shadow: 0 0 25px #999;-moz-box-shadow: 0 0 25px #999;box-shadow: 0 0 25px #999;}
+</style>
+<div id="layer_message" class="gd_div" style="z-index:10001;display:none;"></div>
+<div id="gd_window" class="gd_div" style="z-index:10000001;display:none;"></div>
+<div id="gd_btn_login" class="gd_div" style="z-index:10000000;display:none;">
+<table>
+<tbody><tr><td align="center"><button onclick="gd_login_manual()" style="font-size:20px"><img src="images/gdrive/product20.png" align="absmiddle"> Login &amp; Authorize</button> <button onclick="gd_login_close()" style="font-size:20px">Close</button>
+</td></tr><tr><td>To use this app, Please login to the Google Drive and authorize this app or website.
+<br>(Note: If your browser block or disable the third-party cookies, this login does not work correctly.)
+</td></tr></tbody></table>
+</div>
+<script>
+var CLIENT_ID = '872238254327-dkpivtvin9pkljh3m2qctn4vsm1he4t8.apps.googleusercontent.com';
+var SCOPES = [
+	'https://www.googleapis.com/auth/drive.install',
+	'https://www.googleapis.com/auth/drive.file',
+	'https://www.googleapis.com/auth/youtube'
+];
+var gd_developerKey='AIzaSyCLhPz7j1ikd-MlyuHvMbacMfVL0XQMsPs';
+var gd_mimetype="";
+var gd_export_extension=[];
+var gd_state='';
+
+var gd_picker,gd_picker2,gd_loaded,gd_pickerloaded,gd_lastprogress,gd_issupported,gd_isdownloading,gd_load_timer,gd_bloburl,gd_state2;
+var gd_loginexp=0;
+var gd_callback;
+var ismsie=false;
+if(navigator.appName!="Netscape"){
+	if(navigator.userAgent.indexOf("MSIE")>=0) ismsie=true;
+}
+
+function gd_btn_login2(e,callback){
+	var sl=getScrollLeft();
+	var st=getScrollTop();
+	var w=getWindowWidth();
+	var h=getWindowHeight();
+	function go(a){
+		if(a && a.style.display==''){
+			var x=sl+((w-a.clientWidth) / 2);
+			var y=st+((h-a.clientHeight) / 2);
+			a.style["border"]="1px solid #000000";
+			a.style["padding"]="10px";
+			a.style.left=x+"px";
+			a.style.top=y+"px";
+		}
+	}
+	function go2(){
+		var a=_getid("gviewer");	
+		if(a.style.display!='')return;
+		var dy=40;
+		var dy2=15;
+		var dr=0.07;
+		if(a.getAttribute("data")=="small"){
+			dy2=parseInt(h*0.08); //dr=0.15;
+		}
+		//a.style.left=(sl+parseInt(w*dr))+'px';
+		//a.style.width=(w-(parseInt(w*dr)*2))+'px';
+		var dw=900;
+		a.style.left=(sl+((w-dw)/2))+'px';
+		a.style.width=dw+'px';
+
+		a.style.top=(st+dy)+'px';
+		a.style.height=(h-dy-dy2)+'px';
+
+		var b=_getid("btn_gvclose");
+		b.style.display='';
+		var x=sl+((w-b.offsetWidth) / 2);
+		var y=st+(dy-b.offsetHeight);
+		b.style.left=x+'px';
+		b.style.top=y+'px';
+	}
+	go(_getid("gd_btn_login"));
+	go(_getid("gd_window"));	
+	setTimeout(function(){
+		go(_getid("gd_btn_login"));
+		go(_getid("gd_window"));	
+		if(callback)callback();
+	},10);
+	go2();
+}
+function gd_btn_login(isshow){
+	var a=_getid("gd_btn_login");
+	if(isshow){
+		a.style.display='';
+		gd_btn_login2();
+	}else{
+		a.style.display='none';
+	}
+}
+function gd_login_close(){
+	gd_btn_login(false);
+	gd_state='';
+}
+function gd_login_manual(){
+	var p={'client_id': CLIENT_ID, 'scope': SCOPES.join(' '), 'immediate': false};
+	if(gd_userId){p['login_hint']=gd_userId;p['authuser']=-1;}
+	gapi.auth.authorize(p, function (authResult){ 
+		if (authResult && !authResult.error){
+			gd_loginexp=(new Date()).getTime()+parseInt(authResult.expires_in*0.7*1000);
+			gd_btn_login(false);gd_info();
+			show_message("Login ok!!");
+			if(gd_callback) gd_callback(true);
+			else gd_open_state(true);
+		}else{
+			gd_btn_login(true);
+			show_message("Login failed!!");
+		}
+	});
+}
+function gd_login(callback,react){
+	if(gd_loginexp==0 || gd_loginexp<(new Date()).getTime()){
+	}else{
+		callback(true);
+		return;
+	}
+	var immediate=true; var gd_seluserid=_getid('gd_seluserid');
+	if(gd_seluserid.disabled==false && gd_seluserid.checked) immediate=false;
+	var p={'client_id': CLIENT_ID, 'scope': SCOPES.join(' '), 'immediate': immediate};
+	if(gd_userId){p['login_hint']=gd_userId;p['authuser']=-1;}
+	gapi.auth.authorize(p, function (authResult){
+		if (authResult && !authResult.error){			
+			gd_seluserid.disabled=true;
+			gd_loginexp=(new Date()).getTime()+parseInt(authResult.expires_in*0.7*1000);
+			gd_btn_login(false);gd_info();
+			callback(true);
+		}else{
+			show_message("Login failed!!");
+			gd_btn_login(true);
+			callback(false);
+			if(react) gd_callback=callback;
+			else gd_callback=null;
+		}
+	});
+}
+function gd_checklogin(callback){
+	gd_login(function(result){
+		if(result)callback();
+	},true);
+}
+
+function gd_loadpicker() {		
+	gapi.load('picker',{'callback': function(){
+			gd_pickerloaded=true;
+		}
+	});	
+}
+function gd_createpicker(kind) {
+	function gd_pickercallback(data) {
+		if (data.action == google.picker.Action.PICKED) {
+			if(data.docs && data.docs.length>0 && data.docs[0].id){
+				if(!kind){
+					gd_loadfiles(data.docs);
+				}else if(kind==2 || kind==3){
+					if(data.docs[0].type!="folder"){
+						alert("It's not a folder.");
+						return;
+					}
+					var id=data.docs[0].id;
+					var name=data.docs[0].name;
+					//proc_setfolder(id, name, kind);
+				}
+			}
+		}
+	}
+	var access_token=gapi.auth.getToken().access_token;
+	if(!access_token){
+		alert('Error!! No access token.');
+		return;
+	}
+	if(!kind){
+	 if(!gd_picker){
+	  var view2 = new google.picker.DocsView(google.picker.ViewId.DOCS_VIDEOS);
+	  if(gd_mimetype) view2.setMimeTypes(gd_mimetype);
+	  view2.setMode(google.picker.DocsViewMode.LIST);
+
+		var view4 = new google.picker.DocsView();
+		view4.setIncludeFolders(true);
+		view4.setParent("root");
+		if(gd_mimetype) view4.setMimeTypes(gd_mimetype);
+		view4.setMode(google.picker.DocsViewMode.LIST);
+		var view5 = new google.picker.View(google.picker.ViewId.RECENTLY_PICKED);
+
+      gd_picker = new google.picker.PickerBuilder()
+		  .enableFeature(google.picker.Feature.MULTISELECT_ENABLED)
+		  .setLocale("en")
+		  .setAppId(CLIENT_ID.split('-')[0])		  
+          .setOAuthToken(access_token)
+		  .setTitle("")//Select video files
+          .addView(view2)
+		  .addView(view4)
+		  .addView(view5)
+          .addView(new google.picker.DocsUploadView())
+          .setDeveloperKey(gd_developerKey)
+          .setCallback(gd_pickercallback)
+          .build();
+	 }
+	 gd_picker.setVisible(true);
+	}else if(kind==2 || kind==3){
+	  if(!gd_picker2){
+		var docsView = new google.picker.DocsView()
+          .setIncludeFolders(true) 
+		  .setParent("root")
+          .setMimeTypes('application/vnd.google-apps.folder')
+		  .setMode(google.picker.DocsViewMode.LIST)
+          .setSelectFolderEnabled(true);
+		var view5 = new google.picker.View(google.picker.ViewId.RECENTLY_PICKED);
+
+        gd_picker2 = new google.picker.PickerBuilder()
+		  .setLocale("en") 
+		  .setAppId(CLIENT_ID.split('-')[0])		  
+          .setOAuthToken(access_token)
+		  .setDeveloperKey(gd_developerKey)
+		  .setTitle("Select Target Folder")
+          .addView(docsView)
+		  .addView(view5)
+          .setCallback(gd_pickercallback)
+          .build();
+	  }
+	  gd_picker2.setVisible(true);
+	}
+}
+
+var gd_files=[];
+var gd_files_count=0;
+function gd_loadfiles(docs,isstart){
+	if(gadb){alert('Please disable the adblock for free use.');return;}	if(gd_isdownloading){
+		alert("It's working... Please try again later. or Cancel the current job.");
+		return;
+	}
+	function end(){
+		gd_isdownloading=false;
+		clearTimeout(messagetimer);
+		hide_message();
+		var a=_getid("downlink");
+		if(a.innerHTML && a.innerHTML.indexOf("adownlink")<0){
+			_getid("downlink").innerHTML="<span id=spancount></span>";
+		}		
+		attachment_count();
+	}	
+	var canceled=false;
+	_getid("downlink").innerHTML="<table><tr><td><img src='images/wait.gif' align='absmiddle'><td><a href='#' id='gd_cancel'>Cancel</a><td><div id='gd_progress'>Getting file information...</div></table>";	
+	_getid('gd_cancel').onclick=function(){
+		canceled=true;
+		return false;
+	}
+	gd_isdownloading=true;
+	if(!docs){
+		end();return;
+	}
+
+	var files=[];
+	for(var i = 0; i <= docs.length-1; i++){
+		if(!docs[i].id)continue;
+		var d={};
+		d.id=docs[i].id;
+		d.name=docs[i].name;
+		files.push(d);
+	}
+	
+	function complete(){
+		var d,s,a;
+		cl_files=[];
+		for(var i = 0; i <= files.length-1; i++){
+			d=files[i];
+			if(!d.resp || !d.resp.title || !d.resp.downloadUrl)continue;
+			if(d.resp.mimeType=='application/vnd.google-apps.folder')continue;
+			a={};
+			a.service='Google Drive';
+			a.filename=d.resp.title;
+			a.link=d.resp.downloadUrl;
+			a.link2='https://www.googleapis.com/drive/v2/files/'+d.resp.id+'?alt=media';
+			a.size=d.resp.fileSize;
+			a.resp=d.resp;
+			cl_files.push(a);
+		}		
+		cl_display();
+	}
+	function get(idx){
+		if(idx>files.length-1 || canceled){
+			end();
+			complete();
+			return;
+		}
+		var fileId=files[idx].id;
+		var a=_getid("gd_progress");
+		if(a) a.innerHTML='Getting file info... ('+(idx+1)+'/'+files.length+')';
+
+			var request = gapi.client.drive.files.get({
+				'fileId': fileId
+			});
+			request.execute(function(resp){
+				/*if(isstart && resp.mimeType=='application/vnd.google-apps.folder'){
+					end();
+					var s=resp.title || 'No Name';
+					proc_setfolder(resp.id, s);
+					return;
+				}*/
+				if(resp.error){
+					var s='Error. ';
+					if(files[idx].name) s+=files[idx].name+'  ';
+					if(resp.error.message) s+=resp.error.message+' ';
+					if(resp.error.code==401) s+='Login or Authorize Error.';					
+					proc_log('log1',s,'error');
+				}
+				files[idx].resp=resp;
+				idx++;
+				get(idx);
+			});
+	}
+
+	if(files.length==0){
+		end();return;
+	}
+	gapi.client.load('drive', 'v2', function(){
+		get(0);
+	});
+}
+
+function retrieveAllFiles(query,callback) {
+  var retrievePageOfFiles = function(request, result) {
+    request.execute(function(resp) {
+      result = result.concat(resp.items);
+      var nextPageToken = resp.nextPageToken;
+      if (nextPageToken) {
+        request = gapi.client.drive.files.list({
+          'q': query, 'pageToken': nextPageToken,
+        });
+        retrievePageOfFiles(request, result);
+      } else {
+        callback(result);
+      }
+    });
+  }
+  var initialRequest = gapi.client.drive.files.list({
+		'q': query		
+       });
+  retrievePageOfFiles(initialRequest, []);
+}
+
+function proc_logincheck(){
+	_getid("log4").innerHTML='';
+	_getid("log5").innerHTML='';	
+	var b=_getid("gd_progress2");
+	if(b) b.innerHTML='';
+	_log("log4",'Login checking...','welcome');
+}
+
+function cl_upload(isresume){
+	if(gadb){alert('Please disable the adblock for free use.');return;}	if(gd_isdownloading){
+		alert("It's working... Please try again later. or Cancel the current job.");
+		return;
+	}
+	if(!gd_useable())return;
+
+	proc_saveopt();
+	proc_logincheck();
+	gd_login(function(result){
+		if(!result) return;
+		cl_upload2(isresume);
+	},true);
+}
+function cl_upload2(isresume){
+	if(gd_isdownloading)return;
+	var files=[];
+	for(var i = 0; i <= gd_files.length-1; i++){
+		files.push(gd_files[i]);
+	}
+	/*try{
+		files=JSON.parse(JSON.stringify(gd_files));
+	}catch(err){
+		files=gd_files;
+	}*/
+
+	if(isresume){
+		for(var i=files.length-1;i>=0;i--){
+			if(files[i].success || !files[i].upload){
+				files.splice(i,1);
+			}
+		}		
+	}else{
+		for(var i = 0; i <= files.length-1; i++){
+			delete files[i].success;
+			delete files[i].upload;
+		}
+	}
+
+	if(files.length==0){
+		alert('No files to upload.');
+		return;
+	}
+	var access_token = gapi.auth.getToken().access_token;
+	if(!access_token){
+		alert('Error!! No access token.');
+		return;
+	}
+
+	proc_switchlog(4,_getid('alog4'));  
+  gapi.client.load('drive', 'v2', function(){
+	  go();
+  });
+
+  function go(){	
+	  if(gd_isdownloading)return;
+	var xhr= new XMLHttpRequest(); //upload
+	var xhr2= new XMLHttpRequest(); //download
+
+	iserror=false;
+	g_canceled=false;
+	gd_isdownloading=true;
+	_getid("downlink2").innerHTML="<table><tr><td><a href='#' id='gd_cancelall' style='display:none' title='Cancel all tasks'>Cancel all</a>&nbsp;<td><a href='#' id='gd_cancel2' style='display:none' title='Cancel the current task'>Cancel</a><td><div id='gd_progress2'></div></table>";		
+	proc_log('log1','Started...','welcome');
+
+	var c=_getid('gd_cancelall');
+	if(c){
+		c.style.display='';
+		c.onclick=function(){
+			g_canceled=true;
+			var a=_getid('gd_cancel2');
+			if(a && a.onclick) a.onclick();
+			return false;
+		}
+	}
+
+	function _end(){
+		gd_isdownloading=false;
+		var c=_getid('gd_cancelall');if(c) c.style.display='none';
+		var c=_getid('gd_cancel2');if(c) c.style.display='none';
+		var s='Completed.';
+		if(iserror) s+=' but there are some errors. Check the error log.'; 
+		proc_log('log1',s,'welcome');
+	}
+	function get(idx){
+		function _next(){
+			xhr.abort();xhr2.abort();
+			setTimeout(function(){
+				idx++;
+				get(idx);
+			},20);
+		}
+		function _progress(name,s,state,s2){
+			s='['+(idx+1)+'/'+files.length+'] '+s+' '+files[idx].filename;
+			proc_log(name,s,state,s2);
+		}
+		if(g_canceled || idx>files.length-1){
+			_end();
+			return;
+		}
+		
+		files[idx].canceled=false;
+		var c=_getid('gd_cancel2');
+		if(c){
+			c.style.display='';
+			c.onclick=function(){
+				xhr.abort(); 
+				xhr2.abort();
+				files[idx].canceled=true;
+				this.style.display='none';
+				this.onclick=function(){return false;}
+				_progress('log1','Canceled by user.','error');
+				_next();
+				return false;
+			}
+		}
+						files[idx].downloadurl=files[idx].link;
+						files[idx].downloadurl2=files[idx].link2;
+
+						f_download(function(result){
+							//console.log(result);
+							if(!result){
+								_next();
+								return;
+							}
+							if(result.error){
+								var s='Error. ';
+								if(result.error.message) s+=result.error.message+' ';
+								if(result.error.code==401){
+									s+='Login or Authorize Error.';
+								}
+								_progress('log1',s,'error');
+							}else if(result.id){
+								delete files[idx].upload;
+								files[idx].success=true;								
+								gd_updatedata(files[idx]);
+								var s='['+(idx+1)+'/'+files.length+'] Uploaded to YouTube.';
+								var s2=henc(files[idx].filename);
+								s2+=' &nbsp;<a href="https://www.youtube.com/edit?video_id='+result.id+'" target="_blank" title="Edit this video">Edit</a>';
+								s2+=' &nbsp;<a href="#" onclick="proc_delete(\''+result.id+'\',this);return false" data="'+escape(result.snippet.title || '')+'" title="Delete this video">Delete</a>';
+								proc_log('log1',s,'uploaded',s2);
+							}
+							_next();
+						},xhr,files,idx,xhr2);
+	}//get
+
+	get(0);
+  }
+}
+
+var g_maxdown=100;
+function f_download(callback,xhr,files,idx,xhr2){
+	//g_maxdown=parseInt(_getid('c_maxdown').value);
+	//if(!g_maxdown || isNaN(g_maxdown) || g_maxdown<0) g_maxdown=100;
+
+	var o_fileext=document.optcontainer['o_fileext'].checked;
+	var o_vdesc=document.optcontainer['o_vdesc'].value;
+	var o_vtags=document.optcontainer['o_vtags'].value;
+	//var o_embeddable=document.optcontainer['o_embeddable'].checked;
+	var o_license=document.optcontainer['o_license'].value;
+
+	var cresp=files[idx];
+	function _error(s){
+		var result={};
+		result.error={"message":s};
+		callback(result);
+	}
+	function _end(){
+		callback();
+	}
+	function _progress(s,nolog){
+		var s1='['+(idx+1)+'/'+files.length+'] '+s+' '+(cresp.filename);
+		if(!nolog) proc_log('log1',s1);
+		var a=_getid("gd_progress2");
+		if(a) a.innerHTML=henc(s1);
+	}
+
+	_progress('Transferring...', true);
+	if(!files[idx].f && !cresp.downloadurl){
+		_error('Error. Can not find a Download URL.');
+		return;
+	}
+	if(g_canceled){
+		_end();return;
+	}
+
+	var chunk=30*1024*1024; //30M
+	var len=cresp.size;
+	var blobdata, blobfull;
+	var access_token;
+
+	//////filedata read	
+	function _getfiledata(start,response,isfull){
+		if(blobfull){
+			var end=start+chunk;
+			if(end>len)end=len;
+			blobdata=blobfull.slice(start,end);
+			response();
+			return;
+		}
+		gd_checklogin(function(){
+			access_token=gapi.auth.getToken().access_token;
+			if(!access_token){
+				_error('Error!! No access token for Google Drive.');	return;
+			}
+			try{
+				_getfiledata2(start,response,isfull);
+			}catch(err){
+				_error(err+' or This browser does not support. Please upgrade your browser.');
+			}
+		});
+	}
+	function _getfiledata2(start,response,isfull){
+		if(files[idx].canceled)return;
+		if(g_canceled){_end();return;}
+
+		if(files[idx].f){
+			var data=files[idx];
+			if(data.f.slice) blobdata=data.f.slice(start,chunk+start);
+			else if(data.f.webkitSlice) blobdata=data.f.webkitSlice(start,chunk+start);
+			else if(data.f.mozSlice) blobdata=data.f.mozSlice(start,chunk+start);		
+			if(!blobdata){
+				_error("Read Error: This browser does not support FileReader slice.");
+			}else{
+				response();
+			}
+			return;
+		}
+
+		var end=start+chunk-1;
+		if(end>len-1)end=len-1;
+		gd_lastprogress=(new Date()).getTime();
+
+		var link=cresp.downloadurl;
+		if(cresp.service=='Google Drive'){
+			if(cresp.downloadurl2) link=cresp.downloadurl2;
+			else link+='&access_token='+encodeURIComponent(access_token);
+		}
+
+		xhr2.open('GET', link);
+		xhr2.responseType = 'arraybuffer';
+		var s2=start+'-'+end;
+		if(!isfull) xhr2.setRequestHeader('Range', 'bytes='+s2);
+		if(cresp.service=='Google Drive' && cresp.downloadurl2){
+			xhr2.setRequestHeader('Authorization', 'Bearer ' + access_token);
+		}
+		xhr2.onprogress=function(event){
+			if(gd_lastprogress){
+				var elaspetime = new Date();
+				var dt=(elaspetime.getTime()-gd_lastprogress);
+				if(dt<1000)return;
+				gd_lastprogress=elaspetime.getTime();
+			}
+			var a=event;
+			var total=a.totalSize || a.total || len || 0;
+			if(total>=18446744073709552000) total=0;
+			var current=a.position || a.loaded  || 0;
+			current=current+start;
+			_progress('('+number_format(current)+'/'+number_format(len)+') Downloading...', true);
+			if(isfull && (total>g_maxdown*1024*1024 || current>g_maxdown*1024*1024)){
+				xhr2.abort();
+				_error('The maximum download size is about '+g_maxdown+' M available for this file.');
+			}
+		};
+	    xhr2.onload = function(){
+			if(this.status == 200 || this.status == 206){
+				try{
+					if(isfull) blobfull=new Blob([this.response]);
+					else blobdata=new Blob([this.response]);
+				}catch(err){	
+					_error(err);return;
+				}
+				response();
+			}else{
+				_error("Error (status) " + this.status + "("+this.statusText+") occurred while receiving the file.");
+			}
+		};
+		xhr2.onerror = function(e){      
+			_error("Error " + e.target.status + " occurred while receiving the file.");
+		};
+		xhr2.send();
+	}
+
+	
+	//////upload
+function _upload(){
+	if(files[idx].canceled)return;
+	if(g_canceled){_end();return;}
+	
+	function _resulterror(s1,s2){
+		var result;
+		try{result=JSON.parse(s1);}catch(err){result='';}
+		if(result){
+			callback(result);
+		}else{
+			_error(s2);				
+		}
+	}
+	function _up(url, start){
+		cresp.upload={'url':url, 'next':start};
+		gd_updatedata(cresp);
+
+		gd_checklogin(function(){
+			access_token=gapi.auth.getToken().access_token;
+			if(!access_token){
+				_error('Error!! No access token for Google Drive.');	return;
+			}
+			_up2(url, start);
+		});
+	}
+	function _up2(url, start){
+		var end=start+chunk-1;
+		if(end>len-1)end=len-1;
+
+		function _go(){
+			if(g_canceled){
+				_end();return;
+			}
+			if(!blobdata){
+				_error('Chunk filedata read 0 byte.');				
+				return;
+			}		
+			
+			if(start==0) gd_lastprogress=(new Date()).getTime();
+		
+			var method='PUT';
+			if(files[idx].canceled)return;
+			xhr.open(method, url);
+			xhr.setRequestHeader('Authorization', 'Bearer ' + access_token);
+			xhr.setRequestHeader('Content-Range', 'bytes '+start+'-'+end+'/'+len);
+			if(xhr.upload){
+				xhr.upload.onprogress=function(event){
+					if(gd_lastprogress){
+						var elaspetime = new Date();
+						var dt=(elaspetime.getTime()-gd_lastprogress);
+						if(dt<1000)return;
+						gd_lastprogress=elaspetime.getTime();
+					}
+					var a=event;
+					var total=a.totalSize || a.total || 0;
+					var current=a.position || a.loaded  || 0;
+					current=current+start;
+					_progress('('+number_format(current)+'/'+number_format(len)+') Uploading...', true);
+				};
+			}
+		    xhr.onload = function(){
+				//var status=xhr.getResponseHeader("status");
+				var range;
+				if(!this.response) range=xhr.getResponseHeader("range");
+				if(range){
+					var next=parseInt(range.split('-')[1]);
+					if(!next || isNaN(next)){
+						error('Results range value error');				
+					}else{
+						_up(url, next+1);
+					}
+					return;
+				}else{
+					_resulterror(this.response,'Results value error');
+				}			
+			};
+			xhr.onerror = function(e){      
+				_error("Error " + e.target.status + " occurred while uploading the file.");
+			};
+			xhr.send(blobdata); 	
+		}
+		
+		function _go2(){
+			try{
+				_go();
+			}catch(err){
+				_error('Error. '+err);
+			}
+		}
+		if(!blobfull && start==0 && blobdata){
+			_go2();
+		}else{
+			_getfiledata(start,_go2);
+		}
+	}
+	
+	if(cresp.upload && cresp.upload.url){
+		_progress('Resume upload...', true);
+		_up(cresp.upload.url, cresp.upload.next);
+		return;
+	}
+
+	try{
+		var method='POST';
+		var path='/upload/youtube/v3/videos';
+		var param='uploadType=resumable&part=snippet,status';//snippet,status		
+
+		if(!cresp.filename) cresp.title='No Name';
+		if(!cresp.mimeType) cresp.mimeType=getmimetype(cresp.filename) || 'application/octet-stream';		
+		var title=cresp.filename;
+		if(!o_fileext){
+			var arr=title.split('.');
+			if(arr.length>1){
+				arr.splice(arr.length-1,1);
+				title=arr.join('.');
+			}
+		}
+        var metadata = {
+			"snippet": {
+				"title": title,
+				"description": o_vdesc || title,
+				"tags": o_vtags.split(',')
+			},
+			"status": {
+				"privacyStatus": "private",
+				//"embeddable": o_embeddable,
+				"license": o_license
+			}
+        };
+		var body=JSON.stringify(metadata);
+		_progress('Request upload...',true);
+
+		if(files[idx].canceled)return;
+		if(xhr.upload) xhr.upload.onprogress=null;
+		xhr.open(method, 'https://www.googleapis.com'+path+'?'+param, true);
+		xhr.setRequestHeader('Authorization', 'Bearer ' + access_token);
+		xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+		xhr.setRequestHeader('X-Upload-Content-Type', cresp.mimeType || 'application/octet-stream');
+		xhr.setRequestHeader('X-Upload-Content-Length', len);
+	    xhr.onload = function(){
+			var url=xhr.getResponseHeader("Location");
+			if(url){
+				_up(url, 0);
+			}else{
+				_resulterror(this.response,'Error. Can not find resumable upload URL.');
+			}
+		};
+		xhr.onerror = function(e){      
+			_error("Error " + e.target.status + " occurred while uploading the file.");
+		};
+		xhr.send(body); 	
+	}catch(err){
+		_error(err+' or This browser does not support. Please upgrade your browser.');
+	}
+}
+	//////upload
+	gd_checklogin(function(){
+		access_token=gapi.auth.getToken().access_token;
+		if(!access_token){
+			_error('Error!! No access token for Google Drive.');	return;
+		}
+		if(cresp.service=='Filepicker'){
+			delete cresp.upload;
+			if(len>g_maxdown*1024*1024){
+				_error('The maximum download size is about '+g_maxdown+' M available for this file.');
+				return;
+			}
+			_getfiledata(0,function(){
+				if(!blobfull || blobfull.size==0){
+					_error('Filesize 0 byte.');
+				}else if(blobfull.size!=len){
+					_error('The file size is different.');
+				}else{
+					len=blobfull.size;
+					_upload();
+				}
+			},true);			
+		}else{
+			if(cresp.upload && cresp.upload.url){
+				_upload();
+			}else{
+				_getfiledata(0,function(){
+					_upload();
+				});
+			}
+		}	
+	});
+}
+
+function gd_updatedata(cresp){
+	for(var i = 0; i <= gd_files.length-1; i++){
+		if(cresp.idx==gd_files[i].idx){
+			gd_files[i].upload=cresp.upload;
+			gd_files[i].success=cresp.success;
+			break;
+		}
+	}
+}
+function proc_delete(fileid,f){
+	if(!fileid) return;
+	if(gd_isdownloading){
+		alert("Please try again later. or Cancel the current job.");
+		return;
+	}
+	//gd_isdownloading=true;
+	var title=(f && unescape(f.getAttribute("data") || '')) || '';
+	var answer=confirm(title+"\n\nDelete this video. Are you sure?");
+	if(!answer)return;
+	function _log(s){
+		var a=_getid('gd_progress2');
+		if(!a) _getid("downlink2").innerHTML="<table><tr><td><div id='gd_progress2'></div></table>";	
+		a=_getid('gd_progress2');
+		if(a) a.innerHTML=s;
+	}
+	_log('Deleting...');
+	
+	function _resulterror(s1,s2){
+		var result;
+		var s3='';
+		try{result=JSON.parse(s1);}catch(err){result='';}
+		if(result){
+			if(result.error && result.error.message) s3=result.error.message;
+			else s3=s2;
+		}else{
+			s3=s2;			
+		}
+		return s3;
+	}
+	function go(){
+		var access_token=gapi.auth.getToken().access_token;
+		if(!access_token){
+			_log('Error!! No access token.','error');
+			return;
+		}
+		var s;
+		var xhr= new XMLHttpRequest();
+		xhr.open('DELETE', 'https://www.googleapis.com/youtube/v3/videos?id='+fileid);		
+		xhr.setRequestHeader('Authorization', 'Bearer ' + access_token);
+		xhr.onload = function(){			
+			if(this.status==204){
+				s='<font style="color:green">Video deleted successfully. '+henc(title)+'</font>';
+				_log(s);
+			}else{
+				s="<font style='color:red'>Error. " + henc(_resulterror(this.response, 'Unknown error')) + "</font>";
+				_log(s,'error');
+			}
+		};
+		xhr.onerror = function(e){   
+			s="<font style='color:red'>Error " + e.target.status + " occurred while deleting the video.</font>";
+			_log(s,'error');
+		};
+		xhr.send(''); 	
+	}
+	gd_checklogin(function(){
+		go();
+	});
+}
+
+function attach_delete(){
+	function remove(idx){
+		for(var i = 0; i <= gd_files.length-1; i++){
+			if(gd_files[i].idx==idx){
+				gd_files.splice(i,1);
+				return;
+			}
+		}
+	}
+	var a=_getid("attachment");
+	var k=-1;
+	for(var i=a.options.length-1;i>=0;i--){
+		if(a.options[i].selected){
+			remove(a.options[i].value);
+			a.remove(i);
+			k=i;
+		}
+	}
+	if (k>a.options.length-1) k=a.options.length-1;
+	if (k>=0){
+		a.selectedIndex=k;
+	}
+	attachment_count();
+}
+function attach_clear(){
+	var a=_getid("attachment");
+	for(var i=a.options.length-1;i>=0;i--) a.remove(i);
+	gd_files=[];
+	//gd_files_count=0;
+	attachment_count();
+}
+function attachment_onchange(f){
+	function find(idx){
+		for(var i = 0; i <= gd_files.length-1; i++){
+			if(gd_files[i].idx==idx){
+				var s=henc(gd_files[i].filename);
+				if(gd_files[i].link3 || gd_files[i].link) s='<a id="slink" href="'+(gd_files[i].link3 || gd_files[i].link)+'" target="_blank" title="Download this file">'+henc(gd_files[i].filename)+'</a>';
+				if(gd_files[i].resp && gd_files[i].resp.id){
+					s='<a href="#" onclick="proc_gview('+i+',2);return false" target="_blank" title="View this file">View</a> &nbsp;'+s;
+				}
+				s+=' ('+getsize(gd_files[i].size)+') - '+gd_files[i].service;
+				_getid("desc").innerHTML=s;
+				if(_getid('slink')) _getid('slink').download=gd_files[i].filename;
+				return;
+			}
+		}
+	}
+	var a=_getid("attachment");
+	for(var i=a.options.length-1;i>=0;i--){
+		if(a.options[i].selected){
+			find(a.options[i].value);
+			break;
+		}
+	}
+}
+function attachment_count(){
+	if(!_getid('gd_progress'))_getid("downlink").innerHTML="Add files to the list below. Select from Dropbox, OneDrive, Google Drive, Computer. ("+gd_files.length+" Added)";
+}
+
+function gd_open_picker(kind){
+	if(!gd_useable())return;
+	gd_login(function(result){
+		if(!result) return;
+		gd_createpicker(kind);
+	},true);
+}
+function gd_useable(){
+	if(!gd_issupported){
+		alert("This browser does not support.");
+		return;
+	}
+	if(!gd_loaded || !gd_pickerloaded){
+		alert('Not loaded library. Please try again later.');
+		return;
+	}
+	return true;
+}
+
+function gd_open_state(force){
+	var s=gd_state;
+	if(s){
+		if(!gd_issupported){
+			gd_state='';
+			alert("This browser does not support.");
+			return;
+		}
+		s=decodeURIComponent(s);
+		try{
+			var a=JSON.parse(s);
+			var ids=[];
+			function find(b){
+				if(!b)return;
+				for(var i=0; i <= b.length-1; i++){
+					if(b[i]){
+						var cc={};
+						cc.id=b[i];
+						ids.push(cc);
+					}
+				}
+			}
+			find(a.ids);
+			find(a.exportIds);
+			if(ids.length>0){
+				gd_login(function(result){
+					if(gd_open2 && !force)return;
+					gd_open2=true;
+					if(!result) return;
+					//_getid('gd_btn_reopen').style.display='';
+					gd_state='';
+					gd_loadfiles(ids,true);
+				});				
+			}
+		}catch(err){
+		}
+	}
+}
+function gd_clientload(){
+	gd_loaded=true;
+	if (window.addEventListener){
+		window.addEventListener("resize", gd_btn_login2, false);
+	}else if (window.attachEvent){
+		window.attachEvent("onresize", gd_btn_login2);
+	}
+	gd_open_state();
+}
+var gd_open2;
+function gd_open_state2(){
+	setTimeout(function(){
+		if(!gd_open2)gd_open_state();
+	}, 1000);
+}
+
+function gd_loadscript(callback){
+	function inject(s){
+		var o = document.createElement('scri' + 'pt');
+		o.setAttribute('src', s);
+		o.setAttribute('type', 'text/javascript');
+		document.body.appendChild(o);
+	}
+	if(gd_load_timer)return;
+	if(gd_loaded && gd_pickerloaded)return;
+	gd_load_timer=setInterval(function(){
+		if(gd_loaded && gd_pickerloaded){
+			clearInterval(gd_load_timer);
+			if(callback) callback();
+		}
+	},100);
+	inject('https://apis.google.com/js/client.js?onload=gd_clientload');
+	inject('https://apis.google.com/js/api.js?onload=gd_loadpicker');	
+}
+function gd_reopen(){
+	if(gd_state2){
+		var m="";
+		var s='?';
+		if(m) s+='m='+m+'&';
+		s+='state='+encodeURIComponent(gd_state2);
+		location.href=s;
+	}
+}
+function gd_dblclick(){
+	function dblclick(){
+		try{
+			if(gd_picker)gd_picker.setVisible(false);
+		}catch(err){}
+	}
+	function keydown(e){
+		if(!e)e=window.event;
+		if(e && e.keyCode==27){
+			dblclick();
+			proc_rssclose();
+		}
+	}
+	if(window.addEventListener){
+		document.addEventListener("dblclick", dblclick, false);
+		document.addEventListener("keydown", keydown, false);
+	}else if(window.attachEvent){
+		document.attachEvent("ondblclick", dblclick);
+		document.attachEvent("onkeydown", keydown);
+	}
+}
+var gd_userId,gd_email;
+function gd_weburl(){
+	var s;
+	if(gd_email) s='https://drive.google.com/?authuser='+gd_email;
+	else s='https://drive.google.com/';
+	return s;
+}
+function gd_clickweburl(f){
+	var s=f.href || '';
+	var p1=s.indexOf('#');
+	if(p1<0) s='';
+	else s=s.substr(p1,s.length);
+	f.href=gd_weburl()+s;
+}
+function gd_info(){
+	if(gd_email)return;
+	gapi.client.load('drive', 'v2', function(){
+		var request = gapi.client.drive.about.get();
+		request.execute(function(resp) {
+			if(resp && resp.user){
+				if(gd_email)return;
+				gd_email=resp.user.emailAddress;
+				if(gd_email){
+					var a=_getid('btn_open');
+					var b=_getid('gd_btn_reopen');
+					var c=_getid('myemail');
+					if(a)a.title=a.title+' ('+gd_email+')';
+					if(b)b.title=b.title+' ('+gd_email+')';
+					if(c)c.innerHTML='My Email: '+henc(gd_email);
+				}				
+			}
+		});
+	});
+}
+function gd_init(){
+	gd_dblclick();
+	gd_state2=gd_state;
+	if(!window.XMLHttpRequest){//!window.FileReader || !window.URL ||
+	}else{
+		gd_issupported=true;
+		if(gd_state){
+			try{
+				var a=JSON.parse(gd_state);
+				gd_userId=a.userId;
+				if(a.ids || a.exportIds){
+					_getid("downlink").innerHTML="<table><tr><td><div id='gd_progress'>Ready...</div></table>";
+				}
+			}catch(err){}
+			if(window.addEventListener) window.addEventListener("load", gd_open_state2, false);
+			else if (window.attachEvent) window.attachEvent("onload", gd_open_state2);
+		}
+		gd_loadscript();
+	}	
+	}
+init_load();
+gd_init();
+
+function _getfrmdoc(ifrm){
+	return (ifrm.contentWindow) ? ifrm.contentWindow : (ifrm.contentDocument.document) ? ifrm.contentDocument.document : ifrm.contentDocument;
+}
+var showopt=true;
+function proc_gview(id,kind){
+	var resp='';
+	if(kind==1 && cl_files[id]) resp=cl_files[id].resp;
+	else if(kind==2 && gd_files[id]) resp=gd_files[id].resp;
+	if(!resp)return;
+
+	var a=_getid("gviewer");	
+	var s;
+	/*if(resp.embedLink && resp.videoMediaMetadata && resp.videoMediaMetadata.width && resp.videoMediaMetadata.height){
+		s=resp.embedLink;
+		if(gd_email) s+='&authuser='+encodeURIComponent(gd_email);
+		s='video.php?embedLink='+encodeURIComponent(s)+'&autoplay=1&width='+resp.videoMediaMetadata.width+'&height='+resp.videoMediaMetadata.height+'&id='+encodeURIComponent(resp.id);
+		if(showopt){
+			showopt=false;
+			s+='&showopt=1';
+		}
+	}else{*/
+		s='https://drive.google.com/file/d/'+resp.id+'/preview';
+		if(resp.alternateLink){
+			var p1=resp.alternateLink.lastIndexOf("/");
+			if(p1>=0) s=resp.alternateLink.substr(0,p1)+'/preview';
+		}
+	//}
+	a.setAttribute("data","small");
+	a.style.display='';
+	var ifrm2 = _getfrmdoc(a);
+	ifrm2.location.replace(s);
+	gd_btn_login2();	
+}
+function proc_rssclose(){
+	var a=_getid("gviewer");	
+	if(a && a.style.display==''){
+		a.style.display="none";	
+		_getid("btn_gvclose").style.display="none";	
+		try{
+			var ifrm2 = _getfrmdoc(a);
+			if(ifrm2) ifrm2.location.replace('about:blank');
+		}catch(err){}
+	}
+}
+</script><script src="https://apis.google.com/js/client.js?onload=gd_clientload" type="text/javascript" gapi_processed="true"></script><script src="https://apis.google.com/js/api.js?onload=gd_loadpicker" type="text/javascript" gapi_processed="true"></script>
+
+<button type="button" id="btn_gvclose" style="position:absolute;font-size:20px;padding:4px 25px;display:none;white-space:nowrap"><img src="images/close.png" width="14" align="absmiddle"> Close</button>
+<iframe id="gviewer" src="" style="position:absolute;display:none;background-color:white" class="shadow" frameborder="0" allowfullscreen="true"></iframe>
+<script src="https://storage.googleapis.com/app0126/js/bottom.js" async="" tos="../tos.php?app=YouTube%E2%84%A2%20Uploader%20for%20Dropbox%2C%20Drive" sitetitle="YouTube™ Uploader for Dropbox, Drive"></script>
+
+<ins class="adsbygoogle adsbygoogle-noablate" data-adsbygoogle-status="done" style="display: none !important;"><ins id="aswift_3_expand" style="display:inline-table;border:none;height:0px;margin:0;padding:0;position:relative;visibility:visible;width:0px;background-color:transparent;"><ins id="aswift_3_anchor" style="display:block;border:none;height:0px;margin:0;padding:0;position:relative;visibility:visible;width:0px;background-color:transparent;"><iframe id="aswift_3" name="aswift_3" style="left:0;position:absolute;top:0;border:0;width:undefinedpx;height:undefinedpx;" sandbox="allow-forms allow-pointer-lock allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation" frameborder="0" src="https://googleads.g.doubleclick.net/pagead/ads?client=ca-pub-1113541014872557&amp;output=html&amp;adk=1812271804&amp;adf=3025194257&amp;lmt=1592221598&amp;plat=1%3A32776%2C2%3A32776%2C8%3A32768%2C9%3A32776%2C10%3A32%2C11%3A32%2C16%3A8388608%2C17%3A32%2C24%3A32%2C25%3A32%2C30%3A1081344%2C32%3A32%2C40%3A32&amp;guci=2.2.0.0.2.2.0.0&amp;format=0x0&amp;url=https%3A%2F%2Fimclient.herokuapp.com%2Fyoutubeupload%2F&amp;ea=0&amp;flash=0&amp;pra=7&amp;wgl=1&amp;adsid=ChAI8Lic9wUQidmZwsqB8Y5mEioA-Kx3iMZ4NeqcF33t_WqV3dHVSWKCkTXdFgwVMOup3bu-cojN3du9qFc&amp;dt=1592221598645&amp;bpp=1&amp;bdt=464&amp;idt=1&amp;shv=r20200609&amp;cbv=r20190131&amp;ptt=9&amp;saldr=aa&amp;abxe=1&amp;prev_fmts=792x90_0ads_al%2C796x280&amp;prev_slotnames=2367381506&amp;nras=1&amp;correlator=6843753131997&amp;frm=20&amp;pv=1&amp;ga_vid=689443181.1592221598&amp;ga_sid=1592221598&amp;ga_hid=1717191619&amp;ga_fc=0&amp;iag=0&amp;icsg=146410112&amp;dssz=21&amp;mdo=0&amp;mso=0&amp;u_tz=330&amp;u_his=2&amp;u_java=0&amp;u_h=1080&amp;u_w=1920&amp;u_ah=1040&amp;u_aw=1920&amp;u_cd=24&amp;u_nplug=3&amp;u_nmime=4&amp;adx=-12245933&amp;ady=-12245933&amp;biw=1903&amp;bih=888&amp;scr_x=0&amp;scr_y=0&amp;oid=3&amp;pvsid=3018939568237463&amp;pem=196&amp;rx=0&amp;eae=2&amp;fc=896&amp;brdim=-1917%2C-357%2C-1917%2C-357%2C1920%2C-360%2C1914%2C1034%2C1920%2C888&amp;vis=1&amp;rsz=%7C%7Cs%7C&amp;abl=NS&amp;fu=8208&amp;bc=31&amp;jar=2020-5-27-8&amp;ifi=3&amp;uci=a!3&amp;fsb=1&amp;dtd=8" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" data-google-container-id="a!3" data-load-complete="true"></iframe></ins></ins></ins><iframe frameborder="0" scrolling="no" style="background-color: transparent; border: 0px; display: none;"></iframe><div id="GOOGLE_INPUT_CHEXT_FLAG" input="" input_stat="{&quot;tlang&quot;:true,&quot;tsbc&quot;:true,&quot;pun&quot;:true,&quot;mk&quot;:true,&quot;ss&quot;:true}" style="display: none;"></div><div id="voicein_container" style="display: none;"><div id="voicein_voicebox_container"><div id="voicein_voicebox"></div></div><div id="voicein_optionsbox_container"><div id="voicein_optionsbox">
+  <div id="voicein_popup" style="margin-left: auto; margin-right: 0; margin-bottom: 5px;">
+    <div style="display: inline-block; vertical-align: middle; vertical-align: top;"><img src="chrome-extension://pjnefijmagpdjfhhkpljicbbpicelgko/images/icon144.png" style="width: 30px; vertical-align: top;"></div>
+    <span style="display: inline-block; padding-left: 1px; color: #333" id="voicein_lang">gu-IN</span>
+  </div>
+  <div class="voicein_menu_option" id="voicein_upgrade" style="color: black; border-color: #F2A62C!important; margin-left: auto; margin-right: 0;">
+    <a href="https://dictanote.co/voicein/plus/" target="_blank" title="Voice In Options" style="color: #F2A62C!important;">
+      <svg style="height: 13px;" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="bolt" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" class="svg-inline--fa fa-bolt fa-w-10 fa-2x"><path fill="currentColor" d="M296 160H180.6l42.6-129.8C227.2 15 215.7 0 200 0H56C44 0 33.8 8.9 32.2 20.8l-32 240C-1.7 275.2 9.5 288 24 288h118.7L96.6 482.5c-3.6 15.2 8 29.5 23.3 29.5 8.4 0 16.4-4.4 20.8-12l176-304c9.3-15.9-2.2-36-20.7-36z" class=""></path></svg>        
+      Upgrade
+    </a>
+  </div>
+  <div class="voicein_spacebox_container" style="display: none; background-color: black; margin-left: auto; margin-right: 0; background: black; border: 1px solid black;">
+    <div><textarea id="voicein_spacebox" style="outline: none; margin: 0px; height: 86px; width: 265px; display: block;"></textarea></div>
+    <p style="background: black; margin:0; padding: 0; line-height: 20px; font-size: 12px;"><a href="#" style="color: white; padding-left: 5px" id="voicein_copy_spacebox">Copy</a> <span style="float:right; color: gray"><i>Dictation Box&nbsp;</i></span></p>
+  </div>
+  <div id="voicein_help">
+    <p id="voicein_help_message"></p>
+  </div>
+  </div></div><div id="voicein_modal">
+  <div class="voicein_modal">
+    <div class="voicein_modal_content">
+      <span class="voicein_modal_close">×</span>
+      <h1>Voice In Settings</h1>
+      <div class="voicein_modal_section">
+        <h4>Select your dictation language</h4>
+        <select class="form-control" id="select_language"><option value="af-ZA">Afrikaans (Suid-Afrika)</option><option value="am-ET">አማርኛ (ኢትዮጵያ)</option><option value="hy-AM">Հայ (Հայաստան)</option><option value="az-AZ">Azərbaycan (Azərbaycan)</option><option value="id-ID">Bahasa Indonesia (Indonesia)</option><option value="ms-MY">Bahasa Melayu (Malaysia)</option><option value="bn-BD">বাংলা (বাংলাদেশ)</option><option value="bn-IN">বাংলা (ভারত)</option><option value="ca-ES">Català (Espanya)</option><option value="cs-CZ">Čeština (Česká republika)</option><option value="da-DK">Dansk (Danmark)</option><option value="de-DE">Deutsch (Deutschland)</option><option value="en-AU">English (Australia)</option><option value="en-CA">English (Canada)</option><option value="en-GH">English (Ghana)</option><option value="en-GB">English (Great Britain)</option><option value="en-IN">English (India)</option><option value="en-IE">English (Ireland)</option><option value="en-KE">English (Kenya)</option><option value="en-NZ">English (New Zealand)</option><option value="en-NG">English (Nigeria)</option><option value="en-PH">English (Philippines)</option><option value="en-ZA">English (South Africa)</option><option value="en-TZ">English (Tanzania)</option><option value="en-US">English (United States)</option><option value="es-AR">Español (Argentina)</option><option value="es-BO">Español (Bolivia)</option><option value="es-CL">Español (Chile)</option><option value="es-CO">Español (Colombia)</option><option value="es-CR">Español (Costa Rica)</option><option value="es-EC">Español (Ecuador)</option><option value="es-SV">Español (El Salvador)</option><option value="es-ES">Español (España)</option><option value="es-US">Español (Estados Unidos)</option><option value="es-GT">Español (Guatemala)</option><option value="es-HN">Español (Honduras)</option><option value="es-MX">Español (México)</option><option value="es-NI">Español (Nicaragua)</option><option value="es-PA">Español (Panamá)</option><option value="es-PY">Español (Paraguay)</option><option value="es-PE">Español (Perú)</option><option value="es-PR">Español (Puerto Rico)</option><option value="es-DO">Español (República Dominicana)</option><option value="es-UY">Español (Uruguay)</option><option value="es-VE">Español (Venezuela)</option><option value="eu-ES">Euskara (Espainia)</option><option value="fil-PH">Filipino (Pilipinas)</option><option value="fr-CA">Français (Canada)</option><option value="fr-FR">Français (France)</option><option value="gl-ES">Galego (España)</option><option value="ka-GE">ქართული (საქართველო)</option><option value="gu-IN">ગુજરાતી (ભારત)</option><option value="hr-HR">Hrvatski (Hrvatska)</option><option value="zu-ZA">IsiZulu (Ningizimu Afrika)</option><option value="is-IS">Íslenska (Ísland)</option><option value="it-IT">Italiano (Italia)</option><option value="jv-ID">Jawa (Indonesia)</option><option value="kn-IN">ಕನ್ನಡ (ಭಾರತ)</option><option value="km-KH">ភាសាខ្មែរ (កម្ពុជា)</option><option value="lo-LA">ລາວ (ລາວ)</option><option value="lv-LV">Latviešu (latviešu)</option><option value="lt-LT">Lietuvių (Lietuva)</option><option value="hu-HU">Magyar (Magyarország)</option><option value="ml-IN">മലയാളം (ഇന്ത്യ)</option><option value="mr-IN">मराठी (भारत)</option><option value="nl-NL">Nederlands (Nederland)</option><option value="ne-NP">नेपाली (नेपाल)</option><option value="nb-NO">Norsk bokmål (Norge)</option><option value="pl-PL">Polski (Polska)</option><option value="pt-BR">Português (Brasil)</option><option value="pt-PT">Português (Portugal)</option><option value="ro-RO">Română (România)</option><option value="si-LK">සිංහල (ශ්රී ලංකාව)</option><option value="sk-SK">Slovenčina (Slovensko)</option><option value="sl-SI">Slovenščina (Slovenija)</option><option value="su-ID">Urang (Indonesia)</option><option value="sw-TZ">Swahili (Tanzania)</option><option value="sw-KE">Swahili (Kenya)</option><option value="fi-FI">Suomi (Suomi)</option><option value="sv-SE">Svenska (Sverige)</option><option value="ta-IN">தமிழ் (இந்தியா)</option><option value="ta-SG">தமிழ் (சிங்கப்பூர்)</option><option value="ta-LK">தமிழ் (இலங்கை)</option><option value="ta-MY">தமிழ் (மலேசியா)</option><option value="te-IN">తెలుగు (భారతదేశం)</option><option value="vi-VN">Tiếng Việt (Việt Nam)</option><option value="tr-TR">Türkçe (Türkiye)</option><option value="ur-PK">اردو (پاکستان)</option><option value="ur-IN">اردو (بھارت)</option><option value="el-GR">Ελληνικά (Ελλάδα)</option><option value="bg-BG">Български (България)</option><option value="ru-RU">Русский (Россия)</option><option value="sr-RS">Српски (Србија)</option><option value="uk-UA">Українська (Україна)</option><option value="he-IL">עברית (ישראל)</option><option value="ar-IL">العربية (إسرائيل)</option><option value="ar-JO">العربية (الأردن)</option><option value="ar-AE">العربية (الإمارات)</option><option value="ar-BH">العربية (البحرين)</option><option value="ar-DZ">العربية (الجزائر)</option><option value="ar-SA">العربية (السعودية)</option><option value="ar-IQ">العربية (العراق)</option><option value="ar-KW">العربية (الكويت)</option><option value="ar-MA">العربية (المغرب)</option><option value="ar-TN">العربية (تونس)</option><option value="ar-OM">العربية (عُمان)</option><option value="ar-PS">العربية (فلسطين)</option><option value="ar-QA">العربية (قطر)</option><option value="ar-LB">العربية (لبنان)</option><option value="ar-EG">العربية (مصر)</option><option value="fa-IR">فارسی (ایران)</option><option value="hi-IN">हिन्दी (भारत)</option><option value="th-TH">ไทย (ประเทศไทย)</option><option value="ko-KR">한국어 (대한민국)</option><option value="cmn-Hant-TW">國語 (台灣)</option><option value="yue-Hant-HK">廣東話 (香港)</option><option value="ja-JP">日本語（日本）</option><option value="cmn-Hans-HK">普通話 (香港)</option><option value="cmn-Hans-CN">普通话 (中国大陆)</option></select>
+        <p style="font-size: 10px; margin-top: 10px;">If you change the language, make sure you restart Voice In
+      </p></div>
+      <div class="voicein_modal_section">
+        <h4>Enable Dictation Box <span class="plus-only">🔒 (only for <a target="_blank" href="https://dictanote.co/voicein/plus/">plus users</a>)</span></h4>
+        <div><input type="checkbox" id="voicein_db" disabled=""><label for="#voicein_db">Enable dictation box for this domain</label></div>
+      </div>
+      <div class="voicein_modal_section">
+        <h4>Keyboard Shortcut</h4>
+        <div class="voicein_ks" id="voicein_current_ks">Ctrl+Shift+9</div>
+        <p>You can use the keyboard shortcut to start / stop dictation<br>
+        Go to URL chrome://extensions/shortcuts to change the shortcut</p>
+      </div>
+      <div class="voicein_modal_section">
+        <h4>Language Switcher <span class="plus-only">🔒 (only for <a target="_blank" href="https://dictanote.co/voicein/plus/">plus users</a>)</span></h4>
+        <p>You can use keyboard shortcuts to quickly switch languages<br>
+        Go to URL chrome://extensions/shortcuts to change the shortcut</p>
+        <p><span class="voicein_ks" id="voicein_lang1_ks"></span> <select class="form-control" id="select_lang1_ks" disabled=""><option value="af-ZA">Afrikaans (Suid-Afrika)</option><option value="am-ET">አማርኛ (ኢትዮጵያ)</option><option value="hy-AM">Հայ (Հայաստան)</option><option value="az-AZ">Azərbaycan (Azərbaycan)</option><option value="id-ID">Bahasa Indonesia (Indonesia)</option><option value="ms-MY">Bahasa Melayu (Malaysia)</option><option value="bn-BD">বাংলা (বাংলাদেশ)</option><option value="bn-IN">বাংলা (ভারত)</option><option value="ca-ES">Català (Espanya)</option><option value="cs-CZ">Čeština (Česká republika)</option><option value="da-DK">Dansk (Danmark)</option><option value="de-DE">Deutsch (Deutschland)</option><option value="en-AU">English (Australia)</option><option value="en-CA">English (Canada)</option><option value="en-GH">English (Ghana)</option><option value="en-GB">English (Great Britain)</option><option value="en-IN">English (India)</option><option value="en-IE">English (Ireland)</option><option value="en-KE">English (Kenya)</option><option value="en-NZ">English (New Zealand)</option><option value="en-NG">English (Nigeria)</option><option value="en-PH">English (Philippines)</option><option value="en-ZA">English (South Africa)</option><option value="en-TZ">English (Tanzania)</option><option value="en-US">English (United States)</option><option value="es-AR">Español (Argentina)</option><option value="es-BO">Español (Bolivia)</option><option value="es-CL">Español (Chile)</option><option value="es-CO">Español (Colombia)</option><option value="es-CR">Español (Costa Rica)</option><option value="es-EC">Español (Ecuador)</option><option value="es-SV">Español (El Salvador)</option><option value="es-ES">Español (España)</option><option value="es-US">Español (Estados Unidos)</option><option value="es-GT">Español (Guatemala)</option><option value="es-HN">Español (Honduras)</option><option value="es-MX">Español (México)</option><option value="es-NI">Español (Nicaragua)</option><option value="es-PA">Español (Panamá)</option><option value="es-PY">Español (Paraguay)</option><option value="es-PE">Español (Perú)</option><option value="es-PR">Español (Puerto Rico)</option><option value="es-DO">Español (República Dominicana)</option><option value="es-UY">Español (Uruguay)</option><option value="es-VE">Español (Venezuela)</option><option value="eu-ES">Euskara (Espainia)</option><option value="fil-PH">Filipino (Pilipinas)</option><option value="fr-CA">Français (Canada)</option><option value="fr-FR">Français (France)</option><option value="gl-ES">Galego (España)</option><option value="ka-GE">ქართული (საქართველო)</option><option value="gu-IN">ગુજરાતી (ભારત)</option><option value="hr-HR">Hrvatski (Hrvatska)</option><option value="zu-ZA">IsiZulu (Ningizimu Afrika)</option><option value="is-IS">Íslenska (Ísland)</option><option value="it-IT">Italiano (Italia)</option><option value="jv-ID">Jawa (Indonesia)</option><option value="kn-IN">ಕನ್ನಡ (ಭಾರತ)</option><option value="km-KH">ភាសាខ្មែរ (កម្ពុជា)</option><option value="lo-LA">ລາວ (ລາວ)</option><option value="lv-LV">Latviešu (latviešu)</option><option value="lt-LT">Lietuvių (Lietuva)</option><option value="hu-HU">Magyar (Magyarország)</option><option value="ml-IN">മലയാളം (ഇന്ത്യ)</option><option value="mr-IN">मराठी (भारत)</option><option value="nl-NL">Nederlands (Nederland)</option><option value="ne-NP">नेपाली (नेपाल)</option><option value="nb-NO">Norsk bokmål (Norge)</option><option value="pl-PL">Polski (Polska)</option><option value="pt-BR">Português (Brasil)</option><option value="pt-PT">Português (Portugal)</option><option value="ro-RO">Română (România)</option><option value="si-LK">සිංහල (ශ්රී ලංකාව)</option><option value="sk-SK">Slovenčina (Slovensko)</option><option value="sl-SI">Slovenščina (Slovenija)</option><option value="su-ID">Urang (Indonesia)</option><option value="sw-TZ">Swahili (Tanzania)</option><option value="sw-KE">Swahili (Kenya)</option><option value="fi-FI">Suomi (Suomi)</option><option value="sv-SE">Svenska (Sverige)</option><option value="ta-IN">தமிழ் (இந்தியா)</option><option value="ta-SG">தமிழ் (சிங்கப்பூர்)</option><option value="ta-LK">தமிழ் (இலங்கை)</option><option value="ta-MY">தமிழ் (மலேசியா)</option><option value="te-IN">తెలుగు (భారతదేశం)</option><option value="vi-VN">Tiếng Việt (Việt Nam)</option><option value="tr-TR">Türkçe (Türkiye)</option><option value="ur-PK">اردو (پاکستان)</option><option value="ur-IN">اردو (بھارت)</option><option value="el-GR">Ελληνικά (Ελλάδα)</option><option value="bg-BG">Български (България)</option><option value="ru-RU">Русский (Россия)</option><option value="sr-RS">Српски (Србија)</option><option value="uk-UA">Українська (Україна)</option><option value="he-IL">עברית (ישראל)</option><option value="ar-IL">العربية (إسرائيل)</option><option value="ar-JO">العربية (الأردن)</option><option value="ar-AE">العربية (الإمارات)</option><option value="ar-BH">العربية (البحرين)</option><option value="ar-DZ">العربية (الجزائر)</option><option value="ar-SA">العربية (السعودية)</option><option value="ar-IQ">العربية (العراق)</option><option value="ar-KW">العربية (الكويت)</option><option value="ar-MA">العربية (المغرب)</option><option value="ar-TN">العربية (تونس)</option><option value="ar-OM">العربية (عُمان)</option><option value="ar-PS">العربية (فلسطين)</option><option value="ar-QA">العربية (قطر)</option><option value="ar-LB">العربية (لبنان)</option><option value="ar-EG">العربية (مصر)</option><option value="fa-IR">فارسی (ایران)</option><option value="hi-IN">हिन्दी (भारत)</option><option value="th-TH">ไทย (ประเทศไทย)</option><option value="ko-KR">한국어 (대한민국)</option><option value="cmn-Hant-TW">國語 (台灣)</option><option value="yue-Hant-HK">廣東話 (香港)</option><option value="ja-JP">日本語（日本）</option><option value="cmn-Hans-HK">普通話 (香港)</option><option value="cmn-Hans-CN">普通话 (中国大陆)</option></select></p>
+        <p><span class="voicein_ks" id="voicein_lang2_ks"></span> <select class="form-control" id="select_lang2_ks" disabled=""><option value="af-ZA">Afrikaans (Suid-Afrika)</option><option value="am-ET">አማርኛ (ኢትዮጵያ)</option><option value="hy-AM">Հայ (Հայաստան)</option><option value="az-AZ">Azərbaycan (Azərbaycan)</option><option value="id-ID">Bahasa Indonesia (Indonesia)</option><option value="ms-MY">Bahasa Melayu (Malaysia)</option><option value="bn-BD">বাংলা (বাংলাদেশ)</option><option value="bn-IN">বাংলা (ভারত)</option><option value="ca-ES">Català (Espanya)</option><option value="cs-CZ">Čeština (Česká republika)</option><option value="da-DK">Dansk (Danmark)</option><option value="de-DE">Deutsch (Deutschland)</option><option value="en-AU">English (Australia)</option><option value="en-CA">English (Canada)</option><option value="en-GH">English (Ghana)</option><option value="en-GB">English (Great Britain)</option><option value="en-IN">English (India)</option><option value="en-IE">English (Ireland)</option><option value="en-KE">English (Kenya)</option><option value="en-NZ">English (New Zealand)</option><option value="en-NG">English (Nigeria)</option><option value="en-PH">English (Philippines)</option><option value="en-ZA">English (South Africa)</option><option value="en-TZ">English (Tanzania)</option><option value="en-US">English (United States)</option><option value="es-AR">Español (Argentina)</option><option value="es-BO">Español (Bolivia)</option><option value="es-CL">Español (Chile)</option><option value="es-CO">Español (Colombia)</option><option value="es-CR">Español (Costa Rica)</option><option value="es-EC">Español (Ecuador)</option><option value="es-SV">Español (El Salvador)</option><option value="es-ES">Español (España)</option><option value="es-US">Español (Estados Unidos)</option><option value="es-GT">Español (Guatemala)</option><option value="es-HN">Español (Honduras)</option><option value="es-MX">Español (México)</option><option value="es-NI">Español (Nicaragua)</option><option value="es-PA">Español (Panamá)</option><option value="es-PY">Español (Paraguay)</option><option value="es-PE">Español (Perú)</option><option value="es-PR">Español (Puerto Rico)</option><option value="es-DO">Español (República Dominicana)</option><option value="es-UY">Español (Uruguay)</option><option value="es-VE">Español (Venezuela)</option><option value="eu-ES">Euskara (Espainia)</option><option value="fil-PH">Filipino (Pilipinas)</option><option value="fr-CA">Français (Canada)</option><option value="fr-FR">Français (France)</option><option value="gl-ES">Galego (España)</option><option value="ka-GE">ქართული (საქართველო)</option><option value="gu-IN">ગુજરાતી (ભારત)</option><option value="hr-HR">Hrvatski (Hrvatska)</option><option value="zu-ZA">IsiZulu (Ningizimu Afrika)</option><option value="is-IS">Íslenska (Ísland)</option><option value="it-IT">Italiano (Italia)</option><option value="jv-ID">Jawa (Indonesia)</option><option value="kn-IN">ಕನ್ನಡ (ಭಾರತ)</option><option value="km-KH">ភាសាខ្មែរ (កម្ពុជា)</option><option value="lo-LA">ລາວ (ລາວ)</option><option value="lv-LV">Latviešu (latviešu)</option><option value="lt-LT">Lietuvių (Lietuva)</option><option value="hu-HU">Magyar (Magyarország)</option><option value="ml-IN">മലയാളം (ഇന്ത്യ)</option><option value="mr-IN">मराठी (भारत)</option><option value="nl-NL">Nederlands (Nederland)</option><option value="ne-NP">नेपाली (नेपाल)</option><option value="nb-NO">Norsk bokmål (Norge)</option><option value="pl-PL">Polski (Polska)</option><option value="pt-BR">Português (Brasil)</option><option value="pt-PT">Português (Portugal)</option><option value="ro-RO">Română (România)</option><option value="si-LK">සිංහල (ශ්රී ලංකාව)</option><option value="sk-SK">Slovenčina (Slovensko)</option><option value="sl-SI">Slovenščina (Slovenija)</option><option value="su-ID">Urang (Indonesia)</option><option value="sw-TZ">Swahili (Tanzania)</option><option value="sw-KE">Swahili (Kenya)</option><option value="fi-FI">Suomi (Suomi)</option><option value="sv-SE">Svenska (Sverige)</option><option value="ta-IN">தமிழ் (இந்தியா)</option><option value="ta-SG">தமிழ் (சிங்கப்பூர்)</option><option value="ta-LK">தமிழ் (இலங்கை)</option><option value="ta-MY">தமிழ் (மலேசியா)</option><option value="te-IN">తెలుగు (భారతదేశం)</option><option value="vi-VN">Tiếng Việt (Việt Nam)</option><option value="tr-TR">Türkçe (Türkiye)</option><option value="ur-PK">اردو (پاکستان)</option><option value="ur-IN">اردو (بھارت)</option><option value="el-GR">Ελληνικά (Ελλάδα)</option><option value="bg-BG">Български (България)</option><option value="ru-RU">Русский (Россия)</option><option value="sr-RS">Српски (Србија)</option><option value="uk-UA">Українська (Україна)</option><option value="he-IL">עברית (ישראל)</option><option value="ar-IL">العربية (إسرائيل)</option><option value="ar-JO">العربية (الأردن)</option><option value="ar-AE">العربية (الإمارات)</option><option value="ar-BH">العربية (البحرين)</option><option value="ar-DZ">العربية (الجزائر)</option><option value="ar-SA">العربية (السعودية)</option><option value="ar-IQ">العربية (العراق)</option><option value="ar-KW">العربية (الكويت)</option><option value="ar-MA">العربية (المغرب)</option><option value="ar-TN">العربية (تونس)</option><option value="ar-OM">العربية (عُمان)</option><option value="ar-PS">العربية (فلسطين)</option><option value="ar-QA">العربية (قطر)</option><option value="ar-LB">العربية (لبنان)</option><option value="ar-EG">العربية (مصر)</option><option value="fa-IR">فارسی (ایران)</option><option value="hi-IN">हिन्दी (भारत)</option><option value="th-TH">ไทย (ประเทศไทย)</option><option value="ko-KR">한국어 (대한민국)</option><option value="cmn-Hant-TW">國語 (台灣)</option><option value="yue-Hant-HK">廣東話 (香港)</option><option value="ja-JP">日本語（日本）</option><option value="cmn-Hans-HK">普通話 (香港)</option><option value="cmn-Hans-CN">普通话 (中国大陆)</option></select></p>
+        <p><span class="voicein_ks" id="voicein_lang3_ks"></span> <select class="form-control" id="select_lang3_ks" disabled=""><option value="af-ZA">Afrikaans (Suid-Afrika)</option><option value="am-ET">አማርኛ (ኢትዮጵያ)</option><option value="hy-AM">Հայ (Հայաստան)</option><option value="az-AZ">Azərbaycan (Azərbaycan)</option><option value="id-ID">Bahasa Indonesia (Indonesia)</option><option value="ms-MY">Bahasa Melayu (Malaysia)</option><option value="bn-BD">বাংলা (বাংলাদেশ)</option><option value="bn-IN">বাংলা (ভারত)</option><option value="ca-ES">Català (Espanya)</option><option value="cs-CZ">Čeština (Česká republika)</option><option value="da-DK">Dansk (Danmark)</option><option value="de-DE">Deutsch (Deutschland)</option><option value="en-AU">English (Australia)</option><option value="en-CA">English (Canada)</option><option value="en-GH">English (Ghana)</option><option value="en-GB">English (Great Britain)</option><option value="en-IN">English (India)</option><option value="en-IE">English (Ireland)</option><option value="en-KE">English (Kenya)</option><option value="en-NZ">English (New Zealand)</option><option value="en-NG">English (Nigeria)</option><option value="en-PH">English (Philippines)</option><option value="en-ZA">English (South Africa)</option><option value="en-TZ">English (Tanzania)</option><option value="en-US">English (United States)</option><option value="es-AR">Español (Argentina)</option><option value="es-BO">Español (Bolivia)</option><option value="es-CL">Español (Chile)</option><option value="es-CO">Español (Colombia)</option><option value="es-CR">Español (Costa Rica)</option><option value="es-EC">Español (Ecuador)</option><option value="es-SV">Español (El Salvador)</option><option value="es-ES">Español (España)</option><option value="es-US">Español (Estados Unidos)</option><option value="es-GT">Español (Guatemala)</option><option value="es-HN">Español (Honduras)</option><option value="es-MX">Español (México)</option><option value="es-NI">Español (Nicaragua)</option><option value="es-PA">Español (Panamá)</option><option value="es-PY">Español (Paraguay)</option><option value="es-PE">Español (Perú)</option><option value="es-PR">Español (Puerto Rico)</option><option value="es-DO">Español (República Dominicana)</option><option value="es-UY">Español (Uruguay)</option><option value="es-VE">Español (Venezuela)</option><option value="eu-ES">Euskara (Espainia)</option><option value="fil-PH">Filipino (Pilipinas)</option><option value="fr-CA">Français (Canada)</option><option value="fr-FR">Français (France)</option><option value="gl-ES">Galego (España)</option><option value="ka-GE">ქართული (საქართველო)</option><option value="gu-IN">ગુજરાતી (ભારત)</option><option value="hr-HR">Hrvatski (Hrvatska)</option><option value="zu-ZA">IsiZulu (Ningizimu Afrika)</option><option value="is-IS">Íslenska (Ísland)</option><option value="it-IT">Italiano (Italia)</option><option value="jv-ID">Jawa (Indonesia)</option><option value="kn-IN">ಕನ್ನಡ (ಭಾರತ)</option><option value="km-KH">ភាសាខ្មែរ (កម្ពុជា)</option><option value="lo-LA">ລາວ (ລາວ)</option><option value="lv-LV">Latviešu (latviešu)</option><option value="lt-LT">Lietuvių (Lietuva)</option><option value="hu-HU">Magyar (Magyarország)</option><option value="ml-IN">മലയാളം (ഇന്ത്യ)</option><option value="mr-IN">मराठी (भारत)</option><option value="nl-NL">Nederlands (Nederland)</option><option value="ne-NP">नेपाली (नेपाल)</option><option value="nb-NO">Norsk bokmål (Norge)</option><option value="pl-PL">Polski (Polska)</option><option value="pt-BR">Português (Brasil)</option><option value="pt-PT">Português (Portugal)</option><option value="ro-RO">Română (România)</option><option value="si-LK">සිංහල (ශ්රී ලංකාව)</option><option value="sk-SK">Slovenčina (Slovensko)</option><option value="sl-SI">Slovenščina (Slovenija)</option><option value="su-ID">Urang (Indonesia)</option><option value="sw-TZ">Swahili (Tanzania)</option><option value="sw-KE">Swahili (Kenya)</option><option value="fi-FI">Suomi (Suomi)</option><option value="sv-SE">Svenska (Sverige)</option><option value="ta-IN">தமிழ் (இந்தியா)</option><option value="ta-SG">தமிழ் (சிங்கப்பூர்)</option><option value="ta-LK">தமிழ் (இலங்கை)</option><option value="ta-MY">தமிழ் (மலேசியா)</option><option value="te-IN">తెలుగు (భారతదేశం)</option><option value="vi-VN">Tiếng Việt (Việt Nam)</option><option value="tr-TR">Türkçe (Türkiye)</option><option value="ur-PK">اردو (پاکستان)</option><option value="ur-IN">اردو (بھارت)</option><option value="el-GR">Ελληνικά (Ελλάδα)</option><option value="bg-BG">Български (България)</option><option value="ru-RU">Русский (Россия)</option><option value="sr-RS">Српски (Србија)</option><option value="uk-UA">Українська (Україна)</option><option value="he-IL">עברית (ישראל)</option><option value="ar-IL">العربية (إسرائيل)</option><option value="ar-JO">العربية (الأردن)</option><option value="ar-AE">العربية (الإمارات)</option><option value="ar-BH">العربية (البحرين)</option><option value="ar-DZ">العربية (الجزائر)</option><option value="ar-SA">العربية (السعودية)</option><option value="ar-IQ">العربية (العراق)</option><option value="ar-KW">العربية (الكويت)</option><option value="ar-MA">العربية (المغرب)</option><option value="ar-TN">العربية (تونس)</option><option value="ar-OM">العربية (عُمان)</option><option value="ar-PS">العربية (فلسطين)</option><option value="ar-QA">العربية (قطر)</option><option value="ar-LB">العربية (لبنان)</option><option value="ar-EG">العربية (مصر)</option><option value="fa-IR">فارسی (ایران)</option><option value="hi-IN">हिन्दी (भारत)</option><option value="th-TH">ไทย (ประเทศไทย)</option><option value="ko-KR">한국어 (대한민국)</option><option value="cmn-Hant-TW">國語 (台灣)</option><option value="yue-Hant-HK">廣東話 (香港)</option><option value="ja-JP">日本語（日本）</option><option value="cmn-Hans-HK">普通話 (香港)</option><option value="cmn-Hans-CN">普通话 (中国大陆)</option></select></p>
+      </div>
+      <div class="voicein_modal_section">
+        <h4>Voice Commands</h4>
+        <p>Find all available voice commands for your language <a href="chrome-extension://pjnefijmagpdjfhhkpljicbbpicelgko/voicecommands.html" target="_blank">here</a></p>
+      </div>
+      <div class="voicein_modal_section">
+        <h4>Help</h4>
+        <p>Go to <a href="https://support.dictanote.co/hc/en-us/sections/360006696291-Voice-In" target="_blank">Help Center</a></p>
+      </div>
+    </div>
+  </div></div></div></body><iframe id="google_esf" name="google_esf" src="https://googleads.g.doubleclick.net/pagead/html/r20200609/r20190131/zrt_lookup.html#" data-ad-client="ca-pub-1113541014872557" style="display: none;"></iframe></html>
