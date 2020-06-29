@@ -22,8 +22,13 @@
 
             // Use the API Loader script to load google.picker and gapi.auth.
             function onApiLoad() {
-                gapi.load('auth', {'callback': onAuthApiLoad});
+                //gapi.load('auth', {'callback': onAuthApiLoad});
                 gapi.load('picker', {'callback': onPickerApiLoad});
+            }
+			
+			function onApiLoadAuth() {
+                gapi.load('auth', {'callback': onAuthApiLoad});
+               
             }
 
             function onAuthApiLoad() {
@@ -97,6 +102,7 @@
     <body>
 
         <button onclick="onApiLoad()">Pick From Google Drive</button>
+		 <button onclick="onApiLoadAuth()">Pick From Google Drive Auth</button>
         <div id="result"></div>
 
         <!-- The Google API Loader script. -->
